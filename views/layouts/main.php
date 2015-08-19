@@ -240,8 +240,19 @@ AppAsset::register($this);
 			<!-- NAVIGATION : This navigation is also responsive-->
 			<nav>
 				<ul>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Trámites</span>', array("tramites/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Empleados</span>', array("empleado/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Cuadro de mando</span>', array("site/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Requisiciones</span>', array("requisicion/index")); ?>
+					</li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Solicitudes</span>', array("solicitud/index")); ?>
+					</li>	
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Cotizaciones</span>', array("cotizacion/index")); ?>
+					</li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Orden Compra</span>', array("orden-compra/index")); ?>
+					</li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">Inventario</span>', array("inventario/index")); ?>
+					</li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Orden de Entrega</span>', array("orden-entrega/index")); ?>
+					</li>
           <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username == "dba"){ ?>
 		        <li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Nuevo Usuario</span>', array("site/signup")); ?></li>  
           <?php } ?>
