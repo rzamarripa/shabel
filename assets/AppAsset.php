@@ -58,7 +58,13 @@ class AppAsset extends AssetBundle
 	    "js/datatable/jquery.dataTables.min.js",
 	    "js/datatable/dataTables.bootstrap.js",
 	    "js/datatable/dataTables.responsive.js",
-	    "js/angular/angular.js"
+	    "js/angular/angular.js",
+	    "js/first.js",
+	    "js/uiselect2.js",
+	    "js/controllers/requisicion.js",
+	    "js/select2.min.js",
+	    
+	    
 	    
 	    
     ];
