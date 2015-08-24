@@ -3,16 +3,16 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\USUARIOS;
-use app\models\USUARIOSSearch;
+use app\models\Articulo;
+use app\models\ArticuloSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * 
+ * EmpleadoController implements the CRUD actions for Empleado model.
  */
-class USUARIOSController extends Controller
+class ArticuloController extends Controller
 {
     public function behaviors()
     {
@@ -32,17 +32,17 @@ class USUARIOSController extends Controller
      */
     public function actionIndex()
     {
-        $model= new USUARIOS();
+        $model= new Articulo();
         $model->estatus_did = 1;
         //$model->fechaCreacion_ft =date('Y-m-d H:i:s');
-        $USUARIOS = USUARIOS::find()->all();
-        if (isset($_POST['USUARIOS'])){
+        $Articulo = Articulo::find()->all();
+        if (isset($_POST['Articulo'])){
             $model->load(Yii::$app->request->post());
             //echo "<pre>"; print_r($model); echo "</pre>"; exit;
             $model->save();
-            return $this->redirect('');
+            return $this->redirect('index');
         } else {
-            return $this->render('index', ['model'=>$model,'USUARIOS'=>$USUARIOS]);
+            return $this->render('index', ['model'=>$model,'Articulo'=>$Articulo]);
         }
     }
 
@@ -65,7 +65,7 @@ class USUARIOSController extends Controller
      */
     public function actionCreate()
     {
-        $model = new USUARIOS();
+        $model = new Articulo();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -77,7 +77,7 @@ class USUARIOSController extends Controller
     }
      public function actionCambiar(){
 
-        $model = USUARIOS::find()->where('id=:id', ['id'=>$_GET["id"]])->one();
+        $model = Articulo::find()->where('id=:id', ['id'=>$_GET["id"]])->one();
         
         $model->estatus_did = $_GET['estatus'];
         if($model->save()){
@@ -127,7 +127,7 @@ class USUARIOSController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = USUARIOS::findOne($id)) !== null) {
+        if (($model = Articulo::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');

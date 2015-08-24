@@ -16,13 +16,13 @@ use kartik\select2\Select2;
 
     <?= $form->field($model, 'nombre')->textInput() ?>
 
-    <?= $form->field($model, 'apellidos')->textInput() ?>
-
-    <?= $form->field($model, 'celular')->textInput() ?>
-
-    <?= $form->field($model, 'puesto')->textInput() ?>
-
     <?= $form->field($model, 'direccion')->textInput() ?>
+
+    <?= $form->field($model, 'contacto')->textInput() ?>
+
+    <?= $form->field($model, 'telefono')->textInput() ?>
+
+    <?= $form->field($model, 'correo')->textInput() ?>
 
 
 

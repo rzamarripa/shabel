@@ -1,30 +1,24 @@
-# ************************************************************
-# Sequel Pro SQL dump
-# Versión 4096
-#
-# http://www.sequelpro.com/
-# http://code.google.com/p/sequel-pro/
-#
-# Host: 127.0.0.1 (MySQL 5.5.38)
-# Base de datos: shabel
-# Tiempo de Generación: 2015-08-19 00:43:46 +0000
-# ************************************************************
+/*
+Navicat MySQL Data Transfer
 
+Source Server         : sql
+Source Server Version : 50536
+Source Host           : localhost:3306
+Source Database       : shabel
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!40101 SET NAMES utf8 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+Target Server Type    : MYSQL
+Target Server Version : 50536
+File Encoding         : 65001
 
+Date: 2015-08-22 10:41:50
+*/
 
-# Volcado de tabla actividad
-# ------------------------------------------------------------
+SET FOREIGN_KEY_CHECKS=0;
 
+-- ----------------------------
+-- Table structure for actividad
+-- ----------------------------
 DROP TABLE IF EXISTS `actividad`;
-
 CREATE TABLE `actividad` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `modulo` varchar(20) DEFAULT NULL,
@@ -34,13 +28,10 @@ CREATE TABLE `actividad` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla articulo
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for articulo
+-- ----------------------------
 DROP TABLE IF EXISTS `articulo`;
-
 CREATE TABLE `articulo` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(200) NOT NULL DEFAULT '',
@@ -52,13 +43,10 @@ CREATE TABLE `articulo` (
   CONSTRAINT `articulo_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla cliente
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for cliente
+-- ----------------------------
 DROP TABLE IF EXISTS `cliente`;
-
 CREATE TABLE `cliente` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL DEFAULT '',
@@ -74,35 +62,20 @@ CREATE TABLE `cliente` (
   CONSTRAINT `cliente_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla configuracion
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for configuracion
+-- ----------------------------
 DROP TABLE IF EXISTS `configuracion`;
-
 CREATE TABLE `configuracion` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `mantenimiento` int(11) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `configuracion` WRITE;
-/*!40000 ALTER TABLE `configuracion` DISABLE KEYS */;
-
-INSERT INTO `configuracion` (`id`, `mantenimiento`)
-VALUES
-	(1,0);
-
-/*!40000 ALTER TABLE `configuracion` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Volcado de tabla cotizacion
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for cotizacion
+-- ----------------------------
 DROP TABLE IF EXISTS `cotizacion`;
-
 CREATE TABLE `cotizacion` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `folio` varchar(20) NOT NULL DEFAULT '',
@@ -125,13 +98,10 @@ CREATE TABLE `cotizacion` (
   CONSTRAINT `cotizacion_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla detallecotizacion
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for detallecotizacion
+-- ----------------------------
 DROP TABLE IF EXISTS `detallecotizacion`;
-
 CREATE TABLE `detallecotizacion` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
@@ -152,13 +122,10 @@ CREATE TABLE `detallecotizacion` (
   CONSTRAINT `detallecotizacion_ibfk_2` FOREIGN KEY (`articulo_aid`) REFERENCES `articulo` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla detalleordencompra
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for detalleordencompra
+-- ----------------------------
 DROP TABLE IF EXISTS `detalleordencompra`;
-
 CREATE TABLE `detalleordencompra` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
@@ -176,13 +143,10 @@ CREATE TABLE `detalleordencompra` (
   CONSTRAINT `detalleordencompra_ibfk_3` FOREIGN KEY (`ordencompra_did`) REFERENCES `ordencompra` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla detalleordenentrega
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for detalleordenentrega
+-- ----------------------------
 DROP TABLE IF EXISTS `detalleordenentrega`;
-
 CREATE TABLE `detalleordenentrega` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
@@ -203,13 +167,10 @@ CREATE TABLE `detalleordenentrega` (
   CONSTRAINT `detalleordenentrega_ibfk_3` FOREIGN KEY (`articulo_aid`) REFERENCES `articulo` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla detallerequisicion
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for detallerequisicion
+-- ----------------------------
 DROP TABLE IF EXISTS `detallerequisicion`;
-
 CREATE TABLE `detallerequisicion` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
@@ -227,13 +188,10 @@ CREATE TABLE `detallerequisicion` (
   CONSTRAINT `detallerequisicion_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla detallesolicitud
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for detallesolicitud
+-- ----------------------------
 DROP TABLE IF EXISTS `detallesolicitud`;
-
 CREATE TABLE `detallesolicitud` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
@@ -251,13 +209,10 @@ CREATE TABLE `detallesolicitud` (
   CONSTRAINT `detallesolicitud_solicitud` FOREIGN KEY (`solicitud_did`) REFERENCES `solicitud` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla empleados
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for empleados
+-- ----------------------------
 DROP TABLE IF EXISTS `empleados`;
-
 CREATE TABLE `empleados` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL DEFAULT '',
@@ -270,50 +225,24 @@ CREATE TABLE `empleados` (
   PRIMARY KEY (`id`),
   KEY `empleados_estatus` (`estatus_did`),
   CONSTRAINT `empleados_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `empleados` WRITE;
-/*!40000 ALTER TABLE `empleados` DISABLE KEYS */;
-
-INSERT INTO `empleados` (`id`, `nombre`, `apellidos`, `celular`, `puesto`, `direccion`, `estatus_did`, `fechaCreacion`)
-VALUES
-	(1,'Roberto','Zamarripa Villegas','6677519841','Director','Valle de Oaxaca #2542 Fracc. Valle Alto',1,NULL),
-	(2,'Juan Carlos','Robles Medina','667123123','Programador','Recursos',1,NULL),
-	(3,'Roberto','Zamarripa','6677519841','Programador','Valle Alto',1,NULL);
-
-/*!40000 ALTER TABLE `empleados` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Volcado de tabla estatus
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for estatus
+-- ----------------------------
 DROP TABLE IF EXISTS `estatus`;
-
 CREATE TABLE `estatus` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(20) DEFAULT NULL,
   `requisicion` varchar(20) DEFAULT NULL,
   `cotizacion` varchar(20) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `estatus` WRITE;
-/*!40000 ALTER TABLE `estatus` DISABLE KEYS */;
-
-INSERT INTO `estatus` (`id`, `nombre`, `requisicion`, `cotizacion`)
-VALUES
-	(1,'Activo','Pendiente','Pendiente');
-
-/*!40000 ALTER TABLE `estatus` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Volcado de tabla inventario
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for inventario
+-- ----------------------------
 DROP TABLE IF EXISTS `inventario`;
-
 CREATE TABLE `inventario` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cantidad` int(11) NOT NULL,
@@ -327,13 +256,10 @@ CREATE TABLE `inventario` (
   CONSTRAINT `inventario_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla ordencompra
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for ordencompra
+-- ----------------------------
 DROP TABLE IF EXISTS `ordencompra`;
-
 CREATE TABLE `ordencompra` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `folio` varchar(20) NOT NULL DEFAULT '',
@@ -348,13 +274,10 @@ CREATE TABLE `ordencompra` (
   CONSTRAINT `ordencompra_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla ordenentrega
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for ordenentrega
+-- ----------------------------
 DROP TABLE IF EXISTS `ordenentrega`;
-
 CREATE TABLE `ordenentrega` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `cliente_did` int(11) unsigned NOT NULL,
@@ -371,13 +294,10 @@ CREATE TABLE `ordenentrega` (
   CONSTRAINT `ordenentrega_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla pago
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for pago
+-- ----------------------------
 DROP TABLE IF EXISTS `pago`;
-
 CREATE TABLE `pago` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `requisicion_did` int(11) unsigned NOT NULL,
@@ -388,13 +308,10 @@ CREATE TABLE `pago` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla proveedor
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for proveedor
+-- ----------------------------
 DROP TABLE IF EXISTS `proveedor`;
-
 CREATE TABLE `proveedor` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL DEFAULT '',
@@ -410,13 +327,10 @@ CREATE TABLE `proveedor` (
   CONSTRAINT `proveedor_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla requisicion
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for requisicion
+-- ----------------------------
 DROP TABLE IF EXISTS `requisicion`;
-
 CREATE TABLE `requisicion` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `folio` varchar(20) NOT NULL DEFAULT '',
@@ -436,13 +350,10 @@ CREATE TABLE `requisicion` (
   CONSTRAINT `requisicion_usuario` FOREIGN KEY (`usuario_aid`) REFERENCES `usuarios` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla solicitud
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for solicitud
+-- ----------------------------
 DROP TABLE IF EXISTS `solicitud`;
-
 CREATE TABLE `solicitud` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `requisicion_did` int(11) unsigned NOT NULL,
@@ -456,13 +367,10 @@ CREATE TABLE `solicitud` (
   CONSTRAINT `solicitud_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-
-
-# Volcado de tabla tipousuario
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for tipousuario
+-- ----------------------------
 DROP TABLE IF EXISTS `tipousuario`;
-
 CREATE TABLE `tipousuario` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `nombre` varchar(100) NOT NULL DEFAULT '',
@@ -471,25 +379,12 @@ CREATE TABLE `tipousuario` (
   PRIMARY KEY (`id`),
   KEY `tipousuario_estatus` (`estatus_did`),
   CONSTRAINT `tipousuario_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
-LOCK TABLES `tipousuario` WRITE;
-/*!40000 ALTER TABLE `tipousuario` DISABLE KEYS */;
-
-INSERT INTO `tipousuario` (`id`, `nombre`, `estatus_did`, `fechaCreacion_ft`)
-VALUES
-	(1,'Administrador',1,NULL),
-	(2,'Compras',1,NULL);
-
-/*!40000 ALTER TABLE `tipousuario` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-# Volcado de tabla usuarios
-# ------------------------------------------------------------
-
+-- ----------------------------
+-- Table structure for usuarios
+-- ----------------------------
 DROP TABLE IF EXISTS `usuarios`;
-
 CREATE TABLE `usuarios` (
   `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
   `username` varchar(100) NOT NULL DEFAULT '',
@@ -508,24 +403,4 @@ CREATE TABLE `usuarios` (
   KEY `usuario_empleado` (`empleado_did`),
   CONSTRAINT `usuario_empleado` FOREIGN KEY (`empleado_did`) REFERENCES `empleados` (`id`),
   CONSTRAINT `usuario_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
-LOCK TABLES `usuarios` WRITE;
-/*!40000 ALTER TABLE `usuarios` DISABLE KEYS */;
-
-INSERT INTO `usuarios` (`id`, `username`, `password_hash`, `status`, `email`, `auth_key`, `created_at`, `updated_at`, `password_reset_token`, `empleado_did`, `estatus_did`, `fechacreacion_ft`)
-VALUES
-	(1,'zama','$2y$13$qwBK1uVdFVElaJgmmOTejeVkF/79H9CdZjvGOgL9dunCozxDu5qcC',10,'roberto@masoft.mx','0-VH3OFD9TKCnea_aZflZtGCNxoOS7Qr',1427244706,1427244706,'',1,1,'2015-07-08 12:59:40'),
-	(2,'carlitos','$2y$13$/YzeeqMybFr2o34Ux3102OMcKfP/RgVClimUuwuNAN2YYQ7Weu6Vq',10,'juancarlos@masoft.mx','F6WtN0hehLmVbxLxEf_Ug1Fk8fecLWpz',1436382345,1436382345,'',2,1,'2015-07-08 13:05:45');
-
-/*!40000 ALTER TABLE `usuarios` ENABLE KEYS */;
-UNLOCK TABLES;
-
-
-
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;

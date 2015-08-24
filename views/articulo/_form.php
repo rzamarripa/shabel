@@ -10,20 +10,13 @@ use kartik\select2\Select2;
 /* @var $form yii\widgets\ActiveForm */
 ?>
 
-<div class="empleado-form">
+<div class="Articulo-form">
 
     <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nombre')->textInput() ?>
 
-    <?= $form->field($model, 'apellidos')->textInput() ?>
-
-    <?= $form->field($model, 'celular')->textInput() ?>
-
-    <?= $form->field($model, 'puesto')->textInput() ?>
-
-    <?= $form->field($model, 'direccion')->textInput() ?>
-
+    <?= $form->field($model, 'unidad')->textInput() ?>
 
 
         <?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Guardar cambios', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
