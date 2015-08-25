@@ -62,7 +62,9 @@ class RequisicionController extends Controller
     public function actionCreate()
     {
 	    
-
+	
+                                                                                                            
+		
         $model = new Requisicion();
        
 

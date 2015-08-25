@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\web\View;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -48,6 +49,8 @@ AppAsset::register($this);
 	  <script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/jquery1.10.3.js"></script>
 	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	  <script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/plugin/x-editable/moment.min.js"></script>
+	  
+	  
 	</head>
 	
 	<!--
@@ -429,7 +432,7 @@ AppAsset::register($this);
 			</ul>
 		</div>
 		<!-- END SHORTCUT AREA -->
-
+		
 		<!--================================================== -->
 
 		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -586,6 +589,15 @@ AppAsset::register($this);
 					} ?>
 		     });
 		</script>
+		<?php
+			$this->registerJs('
+				helpers = {                                                                                                     
+					urls: {                  
+					    base: '.json_encode(Yii::$app->getUrlManager()->getBaseUrl()).',
+					}                                                                                                       
+				};', View::POS_HEAD, 'helpers'); 
+		?>
+		
 	</body>
 
 </html>
