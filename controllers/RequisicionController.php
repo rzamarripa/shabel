@@ -61,15 +61,20 @@ class RequisicionController extends Controller
 	    
 	    echo "<pre>"; print_r($_POST); echo "</pre>";
 	    exit;
-      $model = new Requisicion();
-      $model->fecha_ft = date("d-m-Y");
-      if ($model->load(Yii::$app->request->post()) && $model->save()) {
-          return $this->redirect('index');
-      } else {
-          return $this->render('create', [
-              'model' => $model,
-          ]);
-      }
+
+        $model = new Requisicion();
+        $this->performAjaxValidation($model);
+        echo "<pre>";print_r($_POST);echo"</pre>";exit;
+        $model->usuario_aid = Yii::$app->user->id;
+        $model->estatus_did = 1;
+        $model->load(Yii::$app->request->post());
+        if ($model->save()) {
+            return $this->redirect('index');
+        } else {
+            return $this->render('create', [
+                'model' => $model,
+            ]);
+        }
     }
 
     /**

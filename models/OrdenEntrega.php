@@ -36,6 +36,7 @@ class OrdenEntrega extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['cliente_did', 'fecha_f', 'estatus_did'], 'required'],
             [['cliente_did', 'estatus_did'], 'integer'],
             [['fecha_f', 'fechacreacion_ft'], 'safe'],
             [['comentarios'], 'string'],
