@@ -8,7 +8,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		cantidad: '',
 		unidad: '',
 		articulo: null,
-		observaciones: '',
+		comentarios: '',
 		editing: true,
 		error: {
 			cantidad: false,
@@ -21,9 +21,9 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		angular.forEach(window.first.data.detalle, function (detalle_item) {
 			var item = angular.copy(empty_item);
 			item.cantidad = detalle_item.cantidad;
-			item.unidad = detalle_item.unidad_did;
+			item.unidad = detalle_item.unidad;
 			item.articulo = detalle_item.articulo_aid;
-			item.observaciones = detalle_item.observaciones;
+			item.comentarios = detalle_item.comentarios;
 			$scope.items.push(item);
 		});
 	} else {
@@ -35,7 +35,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		width: '100%',
 		minimumInputLength: 2,
 		ajax: {
-			url: '../articulo/autocompletesearch',
+			url: '../../../index.php/articulo/autocompletesearch',
 			dataType: 'json',
 			data: function (term, page) {
 				return {
@@ -59,7 +59,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 			var id = $(el).val();
       if (id !== "") {
       	$.ajax({
-      		url: "../articulo/getajax?id="+id,
+      		url: "../../../index.php/articulo/getajax?id="+id,
           dataType: "json"
         }).done(function(data) { 
         	callback(data); 

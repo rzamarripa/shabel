@@ -25,7 +25,7 @@ use app\controllers\PDO;
     </script>
     <div class="requisicion-form well">
         
-    <?php $form = ActiveForm::begin(['action' => ['requisicion/create']]); ?>
+    <?php $form = ActiveForm::begin(); ?>
         <div class="row">
             <div class="col-sm-2">
                 <?= $form->field($model, 'folio')->textInput(['maxlength' => true]) ?>
@@ -74,7 +74,7 @@ use app\controllers\PDO;
                     </td>
                     <td>
                         <div class="col-sm-12">
-                            <input name="detalle[{{key}}][observaciones]" ng-keypress="enter(item, $event)" type="text" ng-model="item.observaciones" class="form-control" />
+                            <input name="detalle[{{key}}][comentarios]" ng-keypress="enter(item, $event)" type="text" ng-model="item.comentarios" class="form-control" />
                         </div>                      
                     </td>
                     <td>
@@ -92,27 +92,3 @@ use app\controllers\PDO;
     <?php ActiveForm::end(); ?>
     </div>
 </div>
-
-<!--
-<tr ng-repeat="(key,item) in items">
-    <td class="col-xs-1">
-        <span class="control-group" ng-class="{true: 'error', false: ''}[item.error.cantidad]">
-            <input id="item_{{key}}" name="detalle[{{key}}][cantidad]" ng-keypress="enter(item, $event)" type="text" ng-model="item.cantidad" class="input-mini" />
-        </span>
-    </td>
-    <td>
-        <span class="control-group" ng-class="{true: 'error', false: ''}[item.error.articulo]">
-            <input class="articulo" type="hidden" ui-select2="articulosOptions" name="detalle[{{key}}][articulo]" ng-model="item.articulo" />
-        </span>
-    </td>
-    <td>
-        {{item.articulo.unidad}}
-    </td>
-    <td>
-        <input name="detalle[{{key}}][observaciones]" ng-keypress="enter(item, $event)" type="text" ng-model="item.observaciones" />
-    </td>
-    <td>
-        <button ng-click="cancelar(item, $event)" class="btn btn-mini btn-danger">Cancelar</button>
-    </td>
-</tr>
--->
