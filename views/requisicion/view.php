@@ -36,7 +36,6 @@ $this->params['breadcrumbs'][] = $this->title;
             'comentarios:ntext',
             'estatus_did',
             'usuario_aid',
-            'fechacreacion_ft',
         ],
     ]) ?>
 

@@ -9,6 +9,7 @@ use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\mssql\PDO;
+use app\models\DetalleRequisicion;
 
 /**
  * RequisicionController implements the CRUD actions for Requisicion model.
@@ -96,7 +97,7 @@ class RequisicionController extends Controller
        VALUES(:cantidad, :articulo_aid, :comentarios, :estatus_did, :requisicion_did)");
       $comandoDetalle->bindValue(":cantidad", $detalle['cantidad'],PDO::PARAM_STR);
       $comandoDetalle->bindValue(":articulo_aid",$detalle['articulo'],PDO::PARAM_STR);
-      $comandoDetalle->bindValue(":comentarios",$detalle['observaciones'],PDO::PARAM_STR);
+      $comandoDetalle->bindValue(":comentarios",$detalle['comentarios'],PDO::PARAM_STR);
       $comandoDetalle->bindValue(":estatus_did",1,PDO::PARAM_INT);
       $comandoDetalle->bindValue(":requisicion_did",$requisicionId->id,PDO::PARAM_STR);
       $comandoDetalle->execute();
@@ -122,12 +123,14 @@ class RequisicionController extends Controller
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-
+        
+				$detalle = DetalleRequisicion::find()->asArray()->where("requisicion_did = " . $id)->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
                 'model' => $model,
+                'detalle'=> $detalle,
             ]);
         }
     }
