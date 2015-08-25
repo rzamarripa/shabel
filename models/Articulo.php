@@ -7,10 +7,23 @@ use Yii;
 /**
  * This is the model class for table "articulo".
  *
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+ * @property integer $id
+ * @property string $nombre
+ * @property string $unidad
+ * @property integer $estatus_did
+=======
+>>>>>>> 5c821cbbf38f4ad1a37eed017eb7029f149c4120
  * @property string $id
  * @property string $nombre
  * @property string $unidad
  * @property string $estatus_did
+<<<<<<< HEAD
+=======
+>>>>>>> f9f85a2a087f7927fa41a26dca3874f481773dcc
+>>>>>>> 5c821cbbf38f4ad1a37eed017eb7029f149c4120
  * @property string $fechacreacion_ft
  *
  * @property Estatus $estatusD

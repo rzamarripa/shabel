@@ -59,7 +59,18 @@ class AppAsset extends AssetBundle
 	    "js/datatable/dataTables.bootstrap.js",
 	    "js/datatable/dataTables.responsive.js",
 	    "js/angular/angular.js",
+<<<<<<< HEAD
 	    "js/requisicion.js"
+=======
+	    "js/first.js",
+	    "js/uiselect2.js",
+	    "js/controllers/requisicion.js",
+	    "js/select2.min.js",
+	    
+	    
+	    
+	    
+>>>>>>> 5c821cbbf38f4ad1a37eed017eb7029f149c4120
     ];
     public $depends = [
         'yii\web\YiiAsset',

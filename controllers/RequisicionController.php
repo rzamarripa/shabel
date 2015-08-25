@@ -58,6 +58,9 @@ class RequisicionController extends Controller
      */
     public function actionCreate()
     {
+	    
+	    echo "<pre>"; print_r($_POST); echo "</pre>";
+	    exit;
         $model = new Requisicion();
         $this->performAjaxValidation($model);
         echo "<pre>";print_r($_POST);echo"</pre>";exit;
@@ -118,6 +121,23 @@ class RequisicionController extends Controller
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
+        }
+    }
+    
+    /**
+     * Creates a new Requisicion model.
+     * If creation is successful, the browser will be redirected to the 'view' page.
+     * @return mixed
+     */
+    public function actionPrueba()
+    {
+        $model = new Requisicion();
+        if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            return $this->redirect('index');
+        } else {
+            return $this->render('crearRequisicion', [
+                'model' => $model,
+            ]);
         }
     }
 }
