@@ -134,5 +134,75 @@ class ArticuloController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+    
+    public function actionGetajax() {
+			$id = $_GET['id'];
+			$model = $this->loadModel($id);
+			
+			$result = array(
+				'id' => $model->id,
+				'text' => $model->nombre,
+				'unidad' => $model->unidad
+			);
+			echo json_encode($result);
+			Yii::$app->end();
+		}
+		
+		public function actionAutocompletesearch()
+		{
+	    $q = "%". $_GET['term'] ."%";
+			$result = array();
+	    if (!empty($q))
+	    {
+				/*
+					$criteria=new CDbCriteria;
+					$criteria->select=array('id', "CONCAT_WS(' ',nombre) as nombre");				
+					$criteria->condition="lower(CONCAT_WS(' ',nombre)) like lower(:nombre) ";
+					$criteria->params=array(':nombre'=>$q);
+					$criteria->limit='10';
+				*/
+		    $cursor = Articulo::find()->where("lower(CONCAT_WS(' ',nombre)) like lower(:nombre)",[":nombre"=>$q])->all();
+				foreach ($cursor as $valor)	
+				//print_r($valor);
+				
+				$result[]=Array('label' => $valor->nombre,  
+				                'value' => $valor->nombre,
+				                'id' 		=> $valor->id, 
+				                'unidad'=> $valor->unidad);
+	    }
+	    echo json_encode($result);
+			exit;
+		}
+		
+/*
+		public function actionAutocompletar($search = null) {
+        $out = ['more' => false];
+        if (!is_null($search)) {
+            $query = new Query;
+            $query->select('id as id, nombre AS nombre')
+                ->from('Articulo')
+                ->where('nombre LIKE "%' . $search .'%"')
+                ->limit(20);
+            $command = $query->createCommand();
+            $data = $command->queryAll();
+            $out['results'] = array_values($data);
+        }
+        elseif ($id > 0) {
+            $out['results'] = ['id' => $id, 'text' => SubclaseIncidente::findOne($id)->subclase_incidente_nombre];
+        }
+        else {
+            $out['results'] = ['id' => 0, 'text' => 'No se encontraron resultados para subclase'];
+        }
+        echo Json::encode($out);
+    }
+*/
+		
+		public function loadModel($id)
+		{
+			$model = Articulo::find()->where("id = " . $id)->one();
+			if($model===null)
+				throw new CHttpException(404,'The requested page does not exist.');
+			return $model;
+		}
 }
 ?>

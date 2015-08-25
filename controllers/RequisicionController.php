@@ -61,14 +61,15 @@ class RequisicionController extends Controller
 	    
 	    echo "<pre>"; print_r($_POST); echo "</pre>";
 	    exit;
-        $model = new Requisicion();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect('index');
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+      $model = new Requisicion();
+      $model->fecha_ft = date("d-m-Y");
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+          return $this->redirect('index');
+      } else {
+          return $this->render('create', [
+              'model' => $model,
+          ]);
+      }
     }
 
     /**
@@ -127,6 +128,7 @@ class RequisicionController extends Controller
     public function actionPrueba()
     {
         $model = new Requisicion();
+        $model->fecha_f = date("d-m-Y");
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect('index');
         } else {
@@ -135,4 +137,25 @@ class RequisicionController extends Controller
             ]);
         }
     }
+    
+    public function actionAutocompletesearch()
+	{
+	    $q = "%". $_GET['term'] ."%";
+			$result = array();
+	    if (!empty($q))
+	    {
+			$criteria=new CDbCriteria;
+			$criteria->select=array('id', "CONCAT_WS(' ',nombre) as nombre");
+			$criteria->condition="lower(CONCAT_WS(' ',nombre)) like lower(:nombre) ";
+			$criteria->params=array(':nombre'=>$q);
+			$criteria->limit='10';
+	       	$cursor = Requisicion::model()->findAll($criteria);
+			foreach ($cursor as $valor)
+				$result[]=Array('label' => $valor->nombre,
+				                'value' => $valor->nombre,
+				                'id' => $valor->id, );
+	    }
+	    echo json_encode($result);
+	    Yii::app()->end();
+	}
 }

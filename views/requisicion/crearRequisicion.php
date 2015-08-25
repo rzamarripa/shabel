@@ -23,25 +23,29 @@ use kartik\money\MaskMoney;
 		<?php } ?>
 	</script>
 	<div class="requisicion-form">
-
+		
     <?php $form = ActiveForm::begin(['action' => ['requisicion/create']]); ?>
-
-    <?= $form->field($model, 'folio')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'fecha_f')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'cliente_did')->dropDownList(ArrayHelper::map(app\models\Cliente::find()->asArray()->all(), 'id', 'nombre')) ?>
-
-    <?= $form->field($model, 'departamento')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'comentarios')->textarea(['rows' => 6]) ?>
-
-    <?= $form->field($model, 'estatus_did')->textInput(['maxlength' => true]) ?>
-
-    <?= $form->field($model, 'usuario_aid')->textInput(['maxlength' => true]) ?>
-
-    <?php // $form->field($model, 'fechacreacion_ft')->widget(DateControl::classname(), ['type'=>DateControl::FORMAT_DATETIME,]); ?>
-    
+		<div class="row">
+			<div class="col-sm-offset-10 col-sm-2">
+				<?= $form->field($model, 'fecha_f')->textInput(['maxlength' => true]) ?>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-6">
+				<?= $form->field($model, 'cliente_did')->dropDownList(ArrayHelper::map(app\models\Cliente::find()->asArray()->all(), 'id', 'nombre'), ["prompt"=>"Seleccione"]) ?>
+			</div>
+			<div class="col-sm-6">
+				<?= $form->field($model, 'departamento')->textInput(['maxlength' => true]) ?>
+			</div>
+		</div>
+		
+		<div class="row">
+			<div class="col-sm-12">
+				<?= $form->field($model, 'comentarios')->textarea(['rows' => 3]) ?>
+			</div>
+		</div>
+		<hr>    
     <table class="table table-bordered table-striped">
 			<thead>
 				<tr>
@@ -54,10 +58,10 @@ use kartik\money\MaskMoney;
 			</thead>
 			<tbody>
 				<tr ng-repeat="(key,item) in items">
-					<td>
-						<span class="control-group" ng-class="{true: 'error', false: ''}[item.error.cantidad]">
-							<input id="item_{{key}}" name="detalle[{{key}}][cantidad]" ng-keypress="enter(item, $event)" type="text" ng-model="item.cantidad" class="input-mini" />
-						</span>
+					<td class="col-sm-2">
+						<div class="col-sm-12" ng-class="{true: 'error', false: ''}[item.error.cantidad]">
+							<input id="item_{{key}}" name="detalle[{{key}}][cantidad]" ng-keypress="enter(item, $event)" type="text" ng-model="item.cantidad" class="form-control" />
+						</div>
 					</td>
 					<td>
 						<span class="control-group" ng-class="{true: 'error', false: ''}[item.error.articulo]">
@@ -65,10 +69,12 @@ use kartik\money\MaskMoney;
 						</span>
 					</td>
 					<td>
-						{{5 + 5}}
+						{{item.articulo.unidad}}
 					</td>
 					<td>
-						<input name="detalle[{{key}}][observaciones]" ng-keypress="enter(item, $event)" type="text" ng-model="item.observaciones" />
+						<div class="col-sm-12">
+							<input name="detalle[{{key}}][observaciones]" ng-keypress="enter(item, $event)" type="text" ng-model="item.observaciones" class="form-control" />
+						</div>						
 					</td>
 					<td>
 						<button ng-click="cancelar(item, $event)" class="btn btn-mini btn-danger">Cancelar</button>
@@ -85,3 +91,27 @@ use kartik\money\MaskMoney;
     <?php ActiveForm::end(); ?>
 	</div>
 </div>
+
+<!--
+<tr ng-repeat="(key,item) in items">
+	<td class="col-xs-1">
+		<span class="control-group" ng-class="{true: 'error', false: ''}[item.error.cantidad]">
+			<input id="item_{{key}}" name="detalle[{{key}}][cantidad]" ng-keypress="enter(item, $event)" type="text" ng-model="item.cantidad" class="input-mini" />
+		</span>
+	</td>
+	<td>
+		<span class="control-group" ng-class="{true: 'error', false: ''}[item.error.articulo]">
+			<input class="articulo" type="hidden" ui-select2="articulosOptions" name="detalle[{{key}}][articulo]" ng-model="item.articulo" />
+		</span>
+	</td>
+	<td>
+		{{item.articulo.unidad}}
+	</td>
+	<td>
+		<input name="detalle[{{key}}][observaciones]" ng-keypress="enter(item, $event)" type="text" ng-model="item.observaciones" />
+	</td>
+	<td>
+		<button ng-click="cancelar(item, $event)" class="btn btn-mini btn-danger">Cancelar</button>
+	</td>
+</tr>
+-->

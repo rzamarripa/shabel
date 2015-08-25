@@ -41,6 +41,7 @@ class Requisicion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+	        	[["cliente_did"],"required"],
             [['fecha_f', 'fechacreacion_ft'], 'safe'],
             [['cliente_did', 'estatus_did', 'usuario_aid'], 'integer'],
             [['comentarios'], 'string'],
@@ -57,15 +58,34 @@ class Requisicion extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'folio' => 'Folio',
-            'fecha_f' => 'Fecha F',
-            'cliente_did' => 'Cliente Did',
+            'fecha_f' => 'Fecha',
+            'cliente_did' => 'Cliente',
             'departamento' => 'Departamento',
             'comentarios' => 'Comentarios',
-            'estatus_did' => 'Estatus Did',
-            'usuario_aid' => 'Usuario Aid',
-            'fechacreacion_ft' => 'Fechacreacion Ft',
+            'estatus_did' => 'Estatus',
+            'usuario_aid' => 'Usuario',
+            'fechacreacion_ft' => 'Fechacreacion',
         ];
     }
+    
+    public function to_array($include_detalle = false) {
+		$data = array(
+			'id' => $this->id,
+			'folio' => $this->folio,
+			'fecha' => $this->fecha_f,
+			'cliente_did' => $this->cliente_did->to_array(),
+			'comentarios' => $this->comentarios
+		);
+
+		if ($include_detalle) {
+			$items = array();
+			foreach ($this->detalleRequisicion as $item) {
+				$items[] = $item->to_array(array('articulo', 'unidad'));
+			}
+			$data['detalle'] = $items;
+		}
+		return $data;
+	}
 
     /**
      * @return \yii\db\ActiveQuery

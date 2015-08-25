@@ -1,4 +1,5 @@
 app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
+	console.log($scope);
 	window.scope = $scope;
 
 	//console.log($scope);
@@ -31,7 +32,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 
 	$scope.articulosOptions = {
 		containerCssClass: 'myselect2',
-		width: 'copy',
+		width: '100%',
 		minimumInputLength: 2,
 		ajax: {
 			url: '../articulo/autocompletesearch',
@@ -58,7 +59,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 			var id = $(el).val();
       if (id !== "") {
       	$.ajax({
-      		url: "../../articulo/getajax?id="+id,
+      		url: "../articulo/getajax?id="+id,
           dataType: "json"
         }).done(function(data) { 
         	callback(data); 
@@ -68,11 +69,13 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		}
 	};
 
+/*
 	$scope.items = [
 		{cantidad: 34, articulo: 1, error: {cantidad: false, articulo: false}},
 		{cantidad: 334, articulo: 2, error: {cantidad: false, articulo: false}},
 		{cantidad: 34345, articulo: 3, error: {cantidad: false, articulo: false}},
 	]
+*/
 
 	$scope.validate = function (item) {
 		var error = false;
