@@ -4,13 +4,13 @@ namespace app\controllers;
 
 use Yii;
 use app\models\USUARIOS;
-use app\models\USUARIOSSEARCH;
+use app\models\USUARIOSSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * USUARIOSController implements the CRUD actions for USUARIOS model.
+ * 
  */
 class USUARIOSController extends Controller
 {
@@ -27,22 +27,27 @@ class USUARIOSController extends Controller
     }
 
     /**
-     * Lists all USUARIOS models.
+     * Lists all Empleado models.
      * @return mixed
      */
     public function actionIndex()
     {
-        $searchModel = new USUARIOSSEARCH();
-        $dataProvider = $searchModel->search(Yii::$app->request->queryParams);
-
-        return $this->render('index', [
-            'searchModel' => $searchModel,
-            'dataProvider' => $dataProvider,
-        ]);
+        $model= new USUARIOS();
+        $model->estatus_did = 1;
+        //$model->fechaCreacion_ft =date('Y-m-d H:i:s');
+        $USUARIOS = USUARIOS::find()->all();
+        if (isset($_POST['USUARIOS'])){
+            $model->load(Yii::$app->request->post());
+            //echo "<pre>"; print_r($model); echo "</pre>"; exit;
+            $model->save();
+            return $this->redirect('');
+        } else {
+            return $this->render('index', ['model'=>$model,'USUARIOS'=>$USUARIOS]);
+        }
     }
 
     /**
-     * Displays a single USUARIOS model.
+     * Displays a single Empleado model.
      * @param integer $id
      * @return mixed
      */
@@ -54,14 +59,14 @@ class USUARIOSController extends Controller
     }
 
     /**
-     * Creates a new USUARIOS model.
+     * Creates a new Empleado model.
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
     public function actionCreate()
     {
         $model = new USUARIOS();
-        
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -70,28 +75,38 @@ class USUARIOSController extends Controller
             ]);
         }
     }
+     public function actionCambiar(){
+
+        $model = USUARIOS::find()->where('id=:id', ['id'=>$_GET["id"]])->one();
+        
+        $model->estatus_did = $_GET['estatus'];
+        if($model->save()){
+            return $this->redirect('index');
+        }
+    }
+
 
     /**
-     * Updates an existing USUARIOS model.
+     * Updates an existing Empleado model.
      * If update is successful, the browser will be redirected to the 'view' page.
      * @param integer $id
      * @return mixed
      */
-    public function actionUpdate($id)
+     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
+            return $this->redirect('../index');
         } else {
-            return $this->render('update', [
+            return $this->render('_form', [
                 'model' => $model,
             ]);
         }
     }
 
     /**
-     * Deletes an existing USUARIOS model.
+     * Deletes an existing Empleado model.
      * If deletion is successful, the browser will be redirected to the 'index' page.
      * @param integer $id
      * @return mixed
@@ -104,10 +119,10 @@ class USUARIOSController extends Controller
     }
 
     /**
-     * Finds the USUARIOS model based on its primary key value.
+     * Finds the Empleado model based on its primary key value.
      * If the model is not found, a 404 HTTP exception will be thrown.
      * @param integer $id
-     * @return USUARIOS the loaded model
+     * @return Empleado the loaded model
      * @throws NotFoundHttpException if the model cannot be found
      */
     protected function findModel($id)

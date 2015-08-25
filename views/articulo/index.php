@@ -1,61 +1,69 @@
-<?php
-
-use yii\helpers\Html;
-use kartik\grid\GridView;
-use yii\widgets\Pjax;
-
-/**
- * @var yii\web\View $this
- * @var yii\data\ActiveDataProvider $dataProvider
- * @var app\models\ArticuloSearch $searchModel
- */
-
-$this->title = 'Articulos';
-$this->params['breadcrumbs'][] = $this->title;
+<?php 
+    use yii\helpers\Html;
+    use yii\widgets\ActiveForm;
+    use yii\helpers\ArrayHelper;
+    use yii\web\Controller;
+    use app\models\articulo;
 ?>
+
+
+
 <div class="articulo-index">
-    <div class="page-header">
-            <h1><?= Html::encode($this->title) ?></h1>
+
+   
+ 
+
+    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form" aria-expanded="false" aria-controls="form" style="margin-bottom:10px;">
+  Nuevo
+</button>
+<div class="collapse" id="form">
+  <div class="well">
+    <div class="Articulo-form">
+
+     <?php $form = ActiveForm::begin(); ?>
+
+    <?= $form->field($model, 'nombre')->textInput() ?>
+    <?= $form->field($model, 'unidad')->textInput() ?>
+
+
+
+    <div class="form-group">
+        <?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
     </div>
-    <?php // echo $this->render('_search', ['model' => $searchModel]); ?>
 
-    <p>
-        <?php /* echo Html::a('Create Articulo', ['create'], ['class' => 'btn btn-success'])*/  ?>
-    </p>
+    <?php ActiveForm::end(); ?>
+    </div>
+  </div>
+</div>
 
-    <?php Pjax::begin(); echo GridView::widget([
-        'dataProvider' => $dataProvider,
-        'filterModel' => $searchModel,
-        'columns' => [
-            ['class' => 'yii\grid\SerialColumn'],
+   <table id="datatable" class="table table-striped table-bordered">
+    <thead>
+        <tr>
+            <th>Nombre</th>
+            <th>Unidad</th>
+            <th>Acciones</th>
+            
+        </tr>
+    </thead>
+    <tbody>
+        <?php foreach ($Articulo as $Articulo) {?> 
+        <tr>
+            <td><?= $Articulo->nombre ?></td>        
+            <td><?= $Articulo->unidad?></td>
+            <td>
+                <?= Html::a('<span class="fa fa-pencil"></span>',['articulo/update','id'=>$Articulo->id],['class'=>'btn btn-default']) ?>
+                <?php if($Articulo->estatus_did == 1){ echo Html::a('<span class="fa fa-trash-o"></span>',['articulo/cambiar','estatus'=>2,'id'=>$Articulo->id],['class'=>'btn btn-danger']);
+            }else{echo Html::a('<span class="fa fa-recycle"></span>',['articulo/cambiar','estatus'=>1,'id'=>$Articulo->id],['class'=>'btn btn-success']);}?>
+            </td></td>
 
-            'id',
-            'nombre',
-            'unidad',
-            'estatus_did',
-            ['attribute'=>'fechacreacion_ft','format'=>['datetime',(isset(Yii::$app->modules['datecontrol']['displaySettings']['datetime'])) ? Yii::$app->modules['datecontrol']['displaySettings']['datetime'] : 'd-m-Y H:i:s A']],
+            
 
-            [
-                'class' => 'yii\grid\ActionColumn',
-                'buttons' => [
-                'update' => function ($url, $model) {
-                                    return Html::a('<span class="glyphicon glyphicon-pencil"></span>', Yii::$app->urlManager->createUrl(['articulo/view','id' => $model->id,'edit'=>'t']), [
-                                                    'title' => Yii::t('yii', 'Edit'),
-                                                  ]);}
 
-                ],
-            ],
-        ],
-        'responsive'=>true,
-        'hover'=>true,
-        'condensed'=>true,
-        'floatHeader'=>true,
-        'panel' => [
-            'heading'=>'<h3 class="panel-title"><i class="glyphicon glyphicon-th-list"></i> '.Html::encode($this->title).' </h3>',
-            'type'=>'info',
-            'before'=>Html::a('<i class="glyphicon glyphicon-plus"></i> Add', ['create'], ['class' => 'btn btn-success']),                                                                                                                                                          'after'=>Html::a('<i class="glyphicon glyphicon-repeat"></i> Reset List', ['index'], ['class' => 'btn btn-info']),
-            'showFooter'=>false
-        ],
-    ]); Pjax::end(); ?>
+
+           
+        </tr>
+        <?php }?>
+    </tbody>
+</table>
 
 </div>

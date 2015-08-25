@@ -3,8 +3,8 @@
 namespace app\controllers;
 
 use Yii;
-use app\models\Articulo;
-use app\models\ArticuloSearch;
+use app\models\Proveedor;
+use app\models\ProveedorSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
@@ -12,7 +12,7 @@ use yii\filters\VerbFilter;
 /**
  * EmpleadoController implements the CRUD actions for Empleado model.
  */
-class ArticuloController extends Controller
+class ProveedorController extends Controller
 {
     public function behaviors()
     {
@@ -32,17 +32,17 @@ class ArticuloController extends Controller
      */
     public function actionIndex()
     {
-        $model= new Articulo();
+        $model= new Proveedor();
         $model->estatus_did = 1;
         //$model->fechaCreacion_ft =date('Y-m-d H:i:s');
-        $Articulo = Articulo::find()->all();
-        if (isset($_POST['Articulo'])){
+        $Proveedor = Proveedor::find()->all();
+        if (isset($_POST['Proveedor'])){
             $model->load(Yii::$app->request->post());
             //echo "<pre>"; print_r($model); echo "</pre>"; exit;
             $model->save();
-            return $this->redirect('index');
+            return $this->redirect('');
         } else {
-            return $this->render('index', ['model'=>$model,'Articulo'=>$Articulo]);
+            return $this->render('index', ['model'=>$model,'Proveedor'=>$Proveedor]);
         }
     }
 
@@ -65,7 +65,7 @@ class ArticuloController extends Controller
      */
     public function actionCreate()
     {
-        $model = new Articulo();
+        $model = new Proveedor();
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
@@ -75,14 +75,13 @@ class ArticuloController extends Controller
             ]);
         }
     }
-    
-    public function actionCambiar(){
+     public function actionCambiar(){
 
-        $model = Articulo::find()->where('id=:id', ['id'=>$_GET["id"]])->one();
+        $model = Proveedor::find()->where('id=:id', ['id'=>$_GET["id"]])->one();
         
         $model->estatus_did = $_GET['estatus'];
         if($model->save()){
-            return $this->redirect(['index']);
+            return $this->redirect('index');
         }
     }
 
@@ -98,7 +97,7 @@ class ArticuloController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['index']);
+            return $this->redirect('../index');
         } else {
             return $this->render('_form', [
                 'model' => $model,
@@ -128,11 +127,10 @@ class ArticuloController extends Controller
      */
     protected function findModel($id)
     {
-        if (($model = Articulo::findOne($id)) !== null) {
+        if (($model = Proveedor::findOne($id)) !== null) {
             return $model;
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
 }
-?>

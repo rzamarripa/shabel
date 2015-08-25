@@ -23,13 +23,14 @@
 
      <?php $form = ActiveForm::begin(); ?>
 
-      <?= $form->field($model, 'nombre')->textInput() ?>
+    <?= $form->field($model, 'nombre')->textInput() ?>
+    <?= $form->field($model, 'direccion')->textInput() ?>
+    <?= $form->field($model, 'contacto')->textInput() ?>
 
-    <?= $form->field($model, 'password')->textInput() ?>
-
-    <?= $form->field($model, 'estatus')->textInput() ?>
+    <?= $form->field($model, 'telefono')->textInput() ?>
 
     <?= $form->field($model, 'correo')->textInput() ?>
+
 
 
 
@@ -46,25 +47,27 @@
     <thead>
         <tr>
             <th>Nombre</th>
-            <th>contraseña</th>
-            <th>estatus</th>
+            <th>direccion</th>
+            <th>Contacto</th>
+            <th>Telefono</th>
             <th>Correo</th>
             <th>Acciones</th>
             
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($USUARIOS as $usuario) {?> 
+        <?php foreach ($Cliente as $cliente) {?> 
         <tr>
-            <td><?= $usuario->nombre ?></td>        
-            <td><?= $usuario->contraseña?></td>
-            <td><?= $usuario->estatus?></td>               
-            <td><?= $usuario->correo?></td>
+            <td><?= $cliente->nombre ?></td>        
+            <td><?= $cliente->direccion?></td>
+            <td><?= $cliente->telefono?></td>
+            <td><?= $cliente->contacto?></td>
+            <td><?= $cliente->correo?></td>
             
             <td>
-                <?= Html::a('<span class="fa fa-pencil"></span>',['usuario/update','id'=>$usuario->id],['class'=>'btn btn-default']) ?>
-                <?php if($usuario->estatus_did == 1){ echo Html::a('<span class="fa fa-trash-o"></span>',['usuario/cambiar','estatus'=>2,'id'=>$usuario->id],['class'=>'btn btn-danger']);
-            }else{echo Html::a('<span class="fa fa-recycle"></span>',['usuario/cambiar','estatus'=>1,'id'=>$usuario->id],['class'=>'btn btn-success']);}?>
+                <?= Html::a('<span class="fa fa-pencil"></span>',['cliente/update','id'=>$cliente->id],['class'=>'btn btn-default']) ?>
+                <?php if($cliente->estatus_did == 1){ echo Html::a('<span class="fa fa-trash-o"></span>',['cliente/cambiar','estatus'=>2,'id'=>$cliente->id],['class'=>'btn btn-danger']);
+            }else{echo Html::a('<span class="fa fa-recycle"></span>',['cliente/cambiar','estatus'=>1,'id'=>$cliente->id],['class'=>'btn btn-success']);}?>
             </td>
 
             
