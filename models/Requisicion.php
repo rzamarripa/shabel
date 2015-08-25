@@ -15,7 +15,7 @@ use Yii;
  * @property string $comentarios
  * @property string $estatus_did
  * @property string $usuario_aid
- * @property string $fechacreacion_ft
+ * @property string $fechaCreacion_ft
  *
  * @property Cotizacion[] $cotizacions
  * @property Detallerequisicion[] $detallerequisicions
@@ -41,7 +41,8 @@ class Requisicion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['fecha_f', 'fechacreacion_ft'], 'safe'],
+            [['fecha_f', 'cliente_did', 'estatus_did', 'usuario_aid'], 'required'],
+            [['fecha_f', 'fechaCreacion_ft'], 'safe'],
             [['cliente_did', 'estatus_did', 'usuario_aid'], 'integer'],
             [['comentarios'], 'string'],
             [['folio'], 'string', 'max' => 20],
@@ -63,14 +64,14 @@ class Requisicion extends \yii\db\ActiveRecord
             'comentarios' => 'Comentarios',
             'estatus_did' => 'Estatus Did',
             'usuario_aid' => 'Usuario Aid',
-            'fechacreacion_ft' => 'Fechacreacion Ft',
+            'fechaCreacion_ft' => 'Fecha Creacion Ft',
         ];
     }
 
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCotizacion()
+    public function getCotizacions()
     {
         return $this->hasMany(Cotizacion::className(), ['requisicion_did' => 'id']);
     }
@@ -78,7 +79,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDetallerequisicion()
+    public function getDetallerequisicions()
     {
         return $this->hasMany(Detallerequisicion::className(), ['requisicion_did' => 'id']);
     }
@@ -86,7 +87,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getOrdencompra()
+    public function getOrdencompras()
     {
         return $this->hasMany(Ordencompra::className(), ['requisicion_did' => 'id']);
     }
@@ -94,7 +95,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCliente()
+    public function getClienteD()
     {
         return $this->hasOne(Cliente::className(), ['id' => 'cliente_did']);
     }
@@ -102,7 +103,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstatus()
+    public function getEstatusD()
     {
         return $this->hasOne(Estatus::className(), ['id' => 'estatus_did']);
     }
@@ -110,7 +111,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuario()
+    public function getUsuarioA()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_aid']);
     }
@@ -118,7 +119,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSolicitud()
+    public function getSolicituds()
     {
         return $this->hasMany(Solicitud::className(), ['requisicion_did' => 'id']);
     }

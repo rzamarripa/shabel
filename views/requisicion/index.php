@@ -18,11 +18,7 @@ $this->params['breadcrumbs'][] = $this->title;
   Nuevo
 </button>
 <div class="collapse" id="form">
-    <div class="requisicion-index">
-        <div class="col-lg-4 well">
-            <?= $this->render('_form',['model'=>$model]) ?>
-        </div>
-    </div>
+    <?= $this->render('_form',['model'=>$model]) ?>
 </div>
 <table id="datatable" class="table table-striped table-bordered">
     <thead>
