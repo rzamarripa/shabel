@@ -8,6 +8,7 @@ use app\models\RequisicionSearch;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\db\mssql\PDO;
 
 /**
  * RequisicionController implements the CRUD actions for Requisicion model.
@@ -33,6 +34,7 @@ class RequisicionController extends Controller
     public function actionIndex()
     {
         $model = new Requisicion();
+        $model->fecha_f = date("Y-m-d");
         $requisiciones = Requisicion::find()->all();
         return $this->render('index', [
             'model'=>$model,'requisiciones'=>$requisiciones
@@ -59,30 +61,64 @@ class RequisicionController extends Controller
     public function actionCreate()
     {
 	    
-	    echo "<pre>"; print_r($_POST); echo "</pre>";
-	    exit;
 
         $model = new Requisicion();
-        $this->performAjaxValidation($model);
-        echo "<pre>";print_r($_POST);echo"</pre>";exit;
-        $model->usuario_aid = Yii::$app->user->id;
-        $model->estatus_did = 1;
-        $model->load(Yii::$app->request->post());
-        if ($model->save()) {
-            return $this->redirect('index');
-        } else {
-            return $this->render('create', [
-                'model' => $model,
-            ]);
-        }
+       
+
+        if(isset($_POST['Requisicion']) && isset($_POST['detalle']))
+        {
+         try
+         {
+        $requisicion = $_POST['Requisicion'];
+        $conection = Yii::$app->db;
+    $transaction = $conection->beginTransaction();
+    $comandoRequisicion = $conection->createCommand("INSERT INTO Requisicion
+     (folio, fecha_f, cliente_did, departamento,
+     comentarios, estatus_did, usuario_aid)
+     VALUES (:folio, :fecha_f, :cliente_did, :departamento,
+     :comentarios, :estatus_did, :usuario_aid)");
+    $comandoRequisicion->bindValue(":folio", $requisicion['folio'],PDO::PARAM_STR);
+    $comandoRequisicion->bindValue(":fecha_f",$requisicion['fecha_f'],PDO::PARAM_STR);
+    $comandoRequisicion->bindValue(":cliente_did",$requisicion['cliente_did'],PDO::PARAM_INT);
+    $comandoRequisicion->bindValue(":departamento",$requisicion['departamento'],PDO::PARAM_STR);
+    $comandoRequisicion->bindValue(":comentarios",$requisicion['comentarios'],PDO::PARAM_STR);
+    $comandoRequisicion->bindValue(":estatus_did",1,PDO::PARAM_INT);
+    $comandoRequisicion->bindValue(":usuario_aid",Yii::$app->user->id,PDO::PARAM_INT);
+    if($comandoRequisicion->execute())
+    {
+     $requisicionId = Requisicion::find()->orderBy("id DESC")->one();
+
+     $detalleRequisicion = $_POST['detalle'];
+     foreach($detalleRequisicion as $detalle)
+     {
+      $comandoDetalle = $conection->createCommand("INSERT INTO DetalleRequisicion
+       (cantidad, articulo_aid, comentarios, estatus_did, requisicion_did)
+       VALUES(:cantidad, :articulo_aid, :comentarios, :estatus_did, :requisicion_did)");
+      $comandoDetalle->bindValue(":cantidad", $detalle['cantidad'],PDO::PARAM_STR);
+      $comandoDetalle->bindValue(":articulo_aid",$detalle['articulo'],PDO::PARAM_STR);
+      $comandoDetalle->bindValue(":comentarios",$detalle['observaciones'],PDO::PARAM_STR);
+      $comandoDetalle->bindValue(":estatus_did",1,PDO::PARAM_INT);
+      $comandoDetalle->bindValue(":requisicion_did",$requisicionId->id,PDO::PARAM_STR);
+      $comandoDetalle->execute();
+     }
+    }
+    $conection->createCommand("insert into Actividad (descripcion, usuario) Values ('Ha creado una requisición', '" . Yii::$app->user->id . "')")->execute();
+    $transaction->commit();
+    if(isset($_GET["p"]))
+     $this->redirect(array('proyecto/view','id'=>$_GET["p"]));
+    $this->redirect(array('index'));
+   }
+   catch(Exception $e)
+   {
+    $transaction->rollBack();
+
+    echo '<pre>';print_r($e); echo "</pre>";
+    echo '<pre>';print_r($_POST); echo "</pre>";
+    exit;
+       }
+      }
     }
 
-    /**
-     * Updates an existing Requisicion model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param string $id
-     * @return mixed
-     */
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
@@ -130,18 +166,6 @@ class RequisicionController extends Controller
      * If creation is successful, the browser will be redirected to the 'view' page.
      * @return mixed
      */
-    public function actionPrueba()
-    {
-        $model = new Requisicion();
-        $model->fecha_f = date("d-m-Y");
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect('index');
-        } else {
-            return $this->render('crearRequisicion', [
-                'model' => $model,
-            ]);
-        }
-    }
     
     public function actionAutocompletesearch()
 	{

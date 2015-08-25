@@ -114,7 +114,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getClienteD()
+    public function getCliente()
     {
         return $this->hasOne(Cliente::className(), ['id' => 'cliente_did']);
     }
