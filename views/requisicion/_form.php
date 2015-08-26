@@ -7,6 +7,7 @@ use kartik\select2\Select2;
 use kartik\datecontrol\DateControl;
 use kartik\money\MaskMoney;
 use app\controllers\PDO;
+use yii\jui\DatePicker;
 use yii\web\View;
 //use kartik\money\DateControl;
 
@@ -42,7 +43,10 @@ use yii\web\View;
                 <?= $form->field($model, 'departamento')->textInput(['maxlength' => true]) ?>
             </div>
             <div class="col-sm-2">
-                <?= $form->field($model, 'fecha_f')->textInput(['maxlength' => true]) ?>
+                <?= $form->field($model, 'fecha_f')->widget(\yii\jui\DatePicker::classname(), [
+    //'language' => 'ru',
+    'dateFormat' => 'yyyy-MM-dd',
+])->textInput() ?>
             </div>
         </div>
         
