@@ -35,7 +35,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		width: '100%',
 		minimumInputLength: 2,
 		ajax: {
-			url: '../../../index.php/articulo/autocompletesearch',
+			url: '../articulo/autocompletesearch',
 			dataType: 'json',
 			data: function (term, page) {
 				return {
@@ -59,7 +59,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 			var id = $(el).val();
       if (id !== "") {
       	$.ajax({
-      		url: "../../../index.php/articulo/getajax?id="+id,
+      		url: "../articulo/getajax?id="+id,
           dataType: "json"
         }).done(function(data) { 
         	callback(data); 
