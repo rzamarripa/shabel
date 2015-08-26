@@ -455,61 +455,24 @@ AppAsset::register($this);
 		<?php $this->endBody() ?>
 			<script type="text/javascript">
 					$('.tabla').DataTable({
-				        "lengthMenu": [[-1,10, 25, 50], ["Todos", 10, 25, 50]],
-           
-						
-				        "language": {
-				            "lengthMenu": "Mostrar _MENU_ registros por página",
-				            "zeroRecords": "No se encontró coincidencia",
-				            "info": "_PAGE_ de _PAGES_",
-				            "infoEmpty": "No hay registros",
-				            "infoFiltered": "(Filtrar _MAX_ registros totales)",
-				            'search':'Buscar',
-				        },
-				        responsive: {
-				            details: {
-				                type: 'column'
-				            }
-				        },
-				        columnDefs: [ {
-				            className: 'control',
-				            orderable: false,
-				            targets:   0
-				        } ],
-				       // order: [ 1, 'asc' ]
-				        //'scrollX':true,
-			    	});
-
-					$('.tabla2').DataTable({
-						"paging":   false,
-						"ordering": false,
-						"info":     false,
-						"bLengthChange" : false,
-				        "bFilter" : false,               
-						
-				        "language": {
-				            "lengthMenu": "Mostrar _MENU_ registros por página",
-				            "zeroRecords": "No se encontró coincidencia",
-				            "info": "_PAGE_ de _PAGES_",
-				            "infoEmpty": "No hay registros",
-				            "infoFiltered": "(Filtrar _MAX_ registros totales)",
-				            'search':'Buscar',
-				        },
-				        responsive: {
-				            details: {
-				                type: 'column'
-				            }
-				        },
-				        columnDefs: [ {
-				            className: 'control',
-				            orderable: false,
-				            targets:   0
-				        } ],
-				       // order: [ 1, 'asc' ]
-				        //'scrollX':true,
-			    	});
-			    	
-					
+		        "lengthMenu": [[10,-1, 25, 50], [10,"Todos", 25, 50]],
+		        "language": {
+	            "lengthMenu": "Mostrar _MENU_ registros por página",
+	            "zeroRecords": "No se encontró coincidencia",
+	            "info": "_PAGE_ de _PAGES_",
+	            "infoEmpty": "No hay registros",
+	            "infoFiltered": "(Filtrar _MAX_ registros totales)",
+	            "search":"Buscar",
+		        },
+		        responsive: {
+	            details: {
+	              type: 'column'
+	            }
+		        },
+		       // order: [ 1, 'asc' ]
+		        'scrollX':true,
+		    	});
+	
 				  $('.select2').select2({
 					  placeholder: "Seleccione",
 					  allowClear: true

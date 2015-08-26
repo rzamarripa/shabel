@@ -20,27 +20,27 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="collapse" id="form">
     <?= $this->render('_form',['model'=>$model]) ?>
 </div>
-<table id="datatable" class="table table-striped table-bordered">
-    <thead>
-        <tr>
-            <th>Folio</th>
-            <th>cliente</th>
-            <th>Comentarios</th>
-            <th>fecha</th>
-            <th>Acciones</th>   
-        </tr>
-    </thead>
-    <tbody>
-        <?php foreach ($requisiciones as $req) {?> 
-        <tr>
-            <td><?= $req->folio ?></td>
-            <td><?= $req->cliente->nombre ?></td>
-            <td><?= $req->comentarios ?></td>
-            <td><?= $req->fecha_f ?></td>
-            <td>
-            <?= Html::a('<span class="fa fa-pencil"></span>',['requisicion/update','id'=>$req->id],['class'=>'btn btn-default btn-sm'])?>
-            </td>
-        </tr>
-        <?php }?>
-    </tbody>
+<table class="table table-striped table-bordered tabla">
+  <thead>
+    <tr>
+      <th>Folio</th>
+      <th>Fecha</th>
+      <th>Cliente</th>
+      <th>Comentarios</th>            
+      <th>Acciones</th>   
+    </tr>
+  </thead>
+  <tbody>
+    <?php foreach ($requisiciones as $req) { ?> 
+    <tr>
+      <td><?= $req->folio ?></td>
+      <td><?= $req->fecha_f ?></td>
+      <td><?= $req->cliente->nombre ?></td>
+      <td><?= $req->comentarios ?></td>            
+      <td>
+      	<?= Html::a('<span class="fa fa-pencil"></span>',['requisicion/update','id'=>$req->id],['class'=>'btn btn-default btn-sm'])?>
+      </td>
+    </tr>
+    <?php }?>
+  </tbody>
 </table>
