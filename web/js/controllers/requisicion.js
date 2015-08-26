@@ -1,8 +1,5 @@
 app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
-	console.log($scope);
 	window.scope = $scope;
-
-	//console.log($scope);
 
 	var empty_item = {
 		cantidad: '',
@@ -35,7 +32,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		width: '100%',
 		minimumInputLength: 2,
 		ajax: {
-			url: '../articulo/autocompletesearch',
+			url: helpers.urls.base + '/index.php/articulo/autocompletesearch',
 			dataType: 'json',
 			data: function (term, page) {
 				return {
@@ -59,7 +56,7 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 			var id = $(el).val();
       if (id !== "") {
       	$.ajax({
-      		url: "../articulo/getajax?id="+id,
+      		url: helpers.urls.base + "/index.php/articulo/getajax?id="+id,
           dataType: "json"
         }).done(function(data) { 
         	callback(data); 
