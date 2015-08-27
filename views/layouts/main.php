@@ -591,6 +591,16 @@ AppAsset::register($this);
 					} ?>
 		     });
 		</script>
+		<script type="text/javascript">
+$(document).ready( function () {
+        $('#datatable').dataTable( {
+            "sDom": 'T<"clear">lfrtip',
+            "oTableTools": {
+                "sSwfPath": "<?= Yii::$app->getUrlManager()->getBaseUrl() . '/tabletools/swf/copy_csv_xls_pdf.swf' ?>"
+            }
+        } );
+    } );
+</script>
 	</body>
 
 </html>
