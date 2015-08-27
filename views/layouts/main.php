@@ -4,6 +4,7 @@ use yii\bootstrap\Nav;
 use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
+use yii\web\View;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -12,7 +13,7 @@ AppAsset::register($this);
 ?>
 <?php $this->beginPage() ?>
 <!DOCTYPE html>
-<html lang="en-us">
+<html lang="en-us" data-ng-app="shabel">
 	<head>
 		<meta charset="utf-8">
 		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
@@ -48,6 +49,8 @@ AppAsset::register($this);
 	  <script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/jquery1.10.3.js"></script>
 	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
 	  <script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/plugin/x-editable/moment.min.js"></script>
+	  
+	  
 	</head>
 	
 	<!--
@@ -240,21 +243,16 @@ AppAsset::register($this);
 			<!-- NAVIGATION : This navigation is also responsive-->
 			<nav>
 				<ul>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Cuadro de mando</span>', array("site/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Requisiciones</span>', array("requisicion/index")); ?>
-					</li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Solicitudes</span>', array("solicitud/index")); ?>
-					</li>	
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Cotizaciones</span>', array("cotizacion/index")); ?>
-					</li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Orden Compra</span>', array("orden-compra/index")); ?>
-					</li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">Inventario</span>', array("inventario/index")); ?>
-					</li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Orden de Entrega</span>', array("orden-entrega/index")); ?>
-					</li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Cuadro de mando</span>', 				array("site/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Requisiciones</span>', 					array("requisicion/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Solicitudes</span>', 					array("solicitud/index")); ?></li>	
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Cotizaciones</span>', 				array("cotizacion/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Orden Compra</span>', array("orden-compra/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">Inventario</span>', 			array("inventario/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Orden de Entrega</span>', 			array("orden-entrega/index")); ?></li>
+					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Prueba</span>', 								array("requisicion/prueba")); ?></li>
           <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username == "dba"){ ?>
-		        <li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Nuevo Usuario</span>', array("site/signup")); ?></li>  
+		        <li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Nuevo Usuario</span>', 				array("site/signup")); ?></li>  
           <?php } ?>
 					<?php /*
 					<li>
@@ -434,7 +432,7 @@ AppAsset::register($this);
 			</ul>
 		</div>
 		<!-- END SHORTCUT AREA -->
-
+		
 		<!--================================================== -->
 
 		<!-- PACE LOADER - turn this on if you want ajax loading to show (caution: uses lots of memory on iDevices)-->
@@ -457,61 +455,24 @@ AppAsset::register($this);
 		<?php $this->endBody() ?>
 			<script type="text/javascript">
 					$('.tabla').DataTable({
-				        "lengthMenu": [[-1,10, 25, 50], ["Todos", 10, 25, 50]],
-           
-						
-				        "language": {
-				            "lengthMenu": "Mostrar _MENU_ registros por página",
-				            "zeroRecords": "No se encontró coincidencia",
-				            "info": "_PAGE_ de _PAGES_",
-				            "infoEmpty": "No hay registros",
-				            "infoFiltered": "(Filtrar _MAX_ registros totales)",
-				            'search':'Buscar',
-				        },
-				        responsive: {
-				            details: {
-				                type: 'column'
-				            }
-				        },
-				        columnDefs: [ {
-				            className: 'control',
-				            orderable: false,
-				            targets:   0
-				        } ],
-				       // order: [ 1, 'asc' ]
-				        //'scrollX':true,
-			    	});
-
-					$('.tabla2').DataTable({
-						"paging":   false,
-						"ordering": false,
-						"info":     false,
-						"bLengthChange" : false,
-				        "bFilter" : false,               
-						
-				        "language": {
-				            "lengthMenu": "Mostrar _MENU_ registros por página",
-				            "zeroRecords": "No se encontró coincidencia",
-				            "info": "_PAGE_ de _PAGES_",
-				            "infoEmpty": "No hay registros",
-				            "infoFiltered": "(Filtrar _MAX_ registros totales)",
-				            'search':'Buscar',
-				        },
-				        responsive: {
-				            details: {
-				                type: 'column'
-				            }
-				        },
-				        columnDefs: [ {
-				            className: 'control',
-				            orderable: false,
-				            targets:   0
-				        } ],
-				       // order: [ 1, 'asc' ]
-				        //'scrollX':true,
-			    	});
-			    	
-					
+		        "lengthMenu": [[10,-1, 25, 50], [10,"Todos", 25, 50]],
+		        "language": {
+	            "lengthMenu": "Mostrar _MENU_ registros por página",
+	            "zeroRecords": "No se encontró coincidencia",
+	            "info": "_PAGE_ de _PAGES_",
+	            "infoEmpty": "No hay registros",
+	            "infoFiltered": "(Filtrar _MAX_ registros totales)",
+	            "search":"Buscar",
+		        },
+		        responsive: {
+	            details: {
+	              type: 'column'
+	            }
+		        },
+		       // order: [ 1, 'asc' ]
+		        'scrollX':true,
+		    	});
+	
 				  $('.select2').select2({
 					  placeholder: "Seleccione",
 					  allowClear: true
@@ -591,6 +552,7 @@ AppAsset::register($this);
 					} ?>
 		     });
 		</script>
+
 		<script type="text/javascript">
 $(document).ready( function () {
         $('#datatable').dataTable( {
@@ -601,6 +563,17 @@ $(document).ready( function () {
         } );
     } );
 </script>
+
+		<?php
+			$this->registerJs('
+				helpers = {                                                                                                     
+					urls: {                  
+					    base: '.json_encode(Yii::$app->getUrlManager()->getBaseUrl()).',
+					}                                                                                                       
+				};', View::POS_HEAD, 'helpers'); 
+		?>
+		
+
 	</body>
 
 </html>

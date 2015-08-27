@@ -41,6 +41,7 @@ class Cotizacion extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['fecha_f', 'subtotal', 'iva', 'total', 'estatus_did', 'requisicion_did', 'cliente_did'], 'required'],
             [['fecha_f', 'fechacreacion_ft'], 'safe'],
             [['porcentaje', 'subtotal', 'iva', 'total'], 'number'],
             [['estatus_did', 'requisicion_did', 'cliente_did'], 'integer'],

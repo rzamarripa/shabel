@@ -4,23 +4,7 @@ namespace app\models;
 
 use Yii;
 
-/**
- * This is the model class for table "articulo".
- *
- * @property string $id
- * @property string $nombre
- * @property string $unidad
- * @property string $estatus_did
- * @property string $fechacreacion_ft
- *
- * @property Estatus $estatusD
- * @property Detallecotizacion[] $detallecotizacions
- * @property Detalleordencompra[] $detalleordencompras
- * @property Detalleordenentrega[] $detalleordenentregas
- * @property Detallerequisicion[] $detallerequisicions
- * @property Detallesolicitud[] $detallesolicituds
- * @property Inventario[] $inventarios
- */
+
 class Articulo extends \yii\db\ActiveRecord
 {
     /**

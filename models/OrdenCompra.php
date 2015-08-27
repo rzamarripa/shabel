@@ -34,6 +34,7 @@ class OrdenCompra extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['requisicion_did', 'estatus_did'], 'required'],
             [['requisicion_did', 'estatus_did'], 'integer'],
             [['fechaCreacion_ft'], 'safe'],
             [['folio', 'codicionpago'], 'string', 'max' => 20]

@@ -11,7 +11,7 @@ use Yii;
  * @property string $requisicion_did
  * @property string $proveedor_did
  * @property string $fecha_f
- * @property string $fechacreacion_ft
+ * @property string $fechaCreacion_ft
  *
  * @property Detallesolicitud[] $detallesolicituds
  * @property Proveedor $proveedorD
@@ -33,8 +33,9 @@ class Solicitud extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['requisicion_did', 'proveedor_did', 'fecha_f'], 'required'],
             [['requisicion_did', 'proveedor_did'], 'integer'],
-            [['fecha_f', 'fechacreacion_ft'], 'safe']
+            [['fecha_f', 'fechaCreacion_ft'], 'safe']
         ];
     }
 
@@ -48,7 +49,7 @@ class Solicitud extends \yii\db\ActiveRecord
             'requisicion_did' => 'Requisicion Did',
             'proveedor_did' => 'Proveedor Did',
             'fecha_f' => 'Fecha F',
-            'fechacreacion_ft' => 'Fechacreacion Ft',
+            'fechaCreacion_ft' => 'Fecha Creacion Ft',
         ];
     }
 

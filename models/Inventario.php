@@ -32,6 +32,7 @@ class Inventario extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
+            [['cantidad', 'articulos_aid', 'estatus_did'], 'required'],
             [['cantidad', 'articulos_aid', 'estatus_did'], 'integer'],
             [['fechacreacion_ft'], 'safe']
         ];
