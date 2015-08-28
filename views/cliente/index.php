@@ -7,14 +7,8 @@
     use app\models\Cliente;
 ?>
 
-
-
 <div class="cliente-index">
-
-   
- 
-
-    <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form" aria-expanded="false" aria-controls="form" style="margin-bottom:10px;">
+<button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form" aria-expanded="false" aria-controls="form" style="margin-bottom:10px;">
   Nuevo
 </button>
 <div class="collapse" id="form">
@@ -24,15 +18,14 @@
      <?php $form = ActiveForm::begin(); ?>
 
     <?= $form->field($model, 'nombre')->textInput() ?>
+
     <?= $form->field($model, 'direccion')->textInput() ?>
+
     <?= $form->field($model, 'contacto')->textInput() ?>
 
     <?= $form->field($model, 'telefono')->textInput() ?>
 
     <?= $form->field($model, 'correo')->textInput() ?>
-
-
-
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Guardar' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>
@@ -69,12 +62,6 @@
                 <?php if($cliente->estatus_did == 1){ echo Html::a('<span class="fa fa-trash-o"></span>',['cliente/cambiar','estatus'=>2,'id'=>$cliente->id],['class'=>'btn btn-danger']);
             }else{echo Html::a('<span class="fa fa-recycle"></span>',['cliente/cambiar','estatus'=>1,'id'=>$cliente->id],['class'=>'btn btn-success']);}?>
             </td>
-
-            
-
-
-
-           
         </tr>
         <?php }?>
     </tbody>

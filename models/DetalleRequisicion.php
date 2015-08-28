@@ -61,7 +61,7 @@ class DetalleRequisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getArticuloA()
+    public function getArticulo()
     {
         return $this->hasOne(Articulo::className(), ['id' => 'articulo_aid']);
     }
@@ -69,7 +69,7 @@ class DetalleRequisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstatusD()
+    public function getEstatus()
     {
         return $this->hasOne(Estatus::className(), ['id' => 'estatus_did']);
     }
@@ -77,7 +77,7 @@ class DetalleRequisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getRequisicionD()
+    public function getRequisicion()
     {
         return $this->hasOne(Requisicion::className(), ['id' => 'requisicion_did']);
     }
