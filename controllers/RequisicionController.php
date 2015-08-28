@@ -10,6 +10,7 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 use yii\db\mssql\PDO;
 use app\models\DetalleRequisicion;
+use kartik\mpdf\Pdf;
 
 /**
  * RequisicionController implements the CRUD actions for Requisicion model.
@@ -126,7 +127,7 @@ class RequisicionController extends Controller
     {
         $model = $this->findModel($id);
         
-				$detalle = DetalleRequisicion::find()->asArray()->where("requisicion_did = " . $id)->all();
+		$detalle = DetalleRequisicion::find()->asArray()->where("requisicion_did = " . $id)->all();
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
@@ -192,4 +193,13 @@ class RequisicionController extends Controller
 	    echo json_encode($result);
 	    Yii::app()->end();
 	}
+    public function actionImprimir($id) {
+    // get your HTML raw content without any layouts or scripts
+        $requisicion = Requisicion::find()->where('id = :id',['id'=>$id])->one();
+        $detalleRequisicion = detalleRequisicion::find()->where('requisicion_did = :id',['id'=>$id])->all();
+        $pdf = Yii::$app->pdf;
+        $pdf->cssFile = Yii::getAlias('@vendor') . "/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css";
+        $pdf->content = $this->renderPartial('_imprimir',['detalleRequisicion'=>$detalleRequisicion,'requisicion'=>$requisicion]);
+        return $pdf->render();
+    }
 }
