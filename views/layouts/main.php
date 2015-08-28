@@ -245,16 +245,24 @@ AppAsset::register($this);
 			<nav>
 				<ul>
 					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Cuadro de mando</span>', 				array("site/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Requisiciones</span>', 					array("requisicion/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Solicitudes</span>', 					array("solicitud/index")); ?></li>	
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-list-alt"></i> <span class="menu-item-parent">Cotizaciones</span>', 				array("cotizacion/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil-square-o"></i> <span class="menu-item-parent">Orden Compra</span>', array("orden-compra/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-puzzle-piece"></i> <span class="menu-item-parent">Inventario</span>', 			array("inventario/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Orden de Entrega</span>', 			array("orden-entrega/index")); ?></li>
-					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-pencil"></i> <span class="menu-item-parent">Prueba</span>', 								array("requisicion/prueba")); ?></li>
-          <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username == "dba"){ ?>
-		        <li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Nuevo Usuario</span>', 				array("site/signup")); ?></li>  
-          <?php } ?>
+					
+
+
+       			    <li><a href="#"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Usuario</span></a>
+                     <ul>
+                    <li><?= Html::a('Artículo', array("articulo/index")); ?></li>
+                    <li><?= Html::a('Cliente', array("cliente/index")); ?></li>
+                    <li><?= Html::a('Empleado', array("empleado/index")); ?></li>
+                    <li><?= Html::a('Proveedor', array("proveedor/index")); ?></li>
+                    <li><?= Html::a('Requisición', array("requisicion/index")); ?></li>
+                    
+                    <li><?= Html::a('Orden Compra', array("orden-compra/index")); ?></li>
+                    <li><?= Html::a('Orden Entrega', array("orden-entrega/index")); ?></li>
+                    </ul>
+                    </li>
+                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username == "dba"){ ?>
+		            <li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Nuevo Usuario</span>', 				array("site/signup")); ?></li>  
+                    <?php } ?>
 					<?php /*
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Requi</span></a>
@@ -549,6 +557,18 @@ AppAsset::register($this);
 					} ?>
 		     });
 		</script>
+
+		<script type="text/javascript">
+$(document).ready( function () {
+        $('#datatable').dataTable( {
+            "sDom": 'T<"clear">lfrtip',
+            "oTableTools": {
+                "sSwfPath": "<?= Yii::$app->getUrlManager()->getBaseUrl() . '/tabletools/swf/copy_csv_xls_pdf.swf' ?>"
+            }
+        } );
+    } );
+</script>
+
 		<?php
 			$this->registerJs('
 				helpers = {                                                                                                     
@@ -558,6 +578,7 @@ AppAsset::register($this);
 				};', View::POS_HEAD, 'helpers'); 
 		?>
 		
+
 	</body>
 
 </html>

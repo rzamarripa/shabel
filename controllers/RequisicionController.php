@@ -42,6 +42,24 @@ class RequisicionController extends Controller
             'model'=>$model,'requisiciones'=>$requisiciones
         ]);
     }
+  
+  /* public function actionCotizacion($requisicion_did){
+        $model= new requisicion();
+        $model->requisicion_did = $requisicion_did;
+$requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',['requisicion_did'=>$requisicion_did])->all();
+      if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $id = $model->id;
+           $model= new requisicion();
+            return $this->redirect(['requisicion', 'model' => $model, 'requisicion'=>$requisicion,'id' => $id,'id'=> $id]);
+        } else {
+            return $this->render('requisicion', ['model'=>$model,'requisicion'=>$requisicion]);
+        }
+    }
+}
+
+
+
+ 
 
     /**
      * Displays a single Requisicion model.
