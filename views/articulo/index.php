@@ -16,6 +16,7 @@
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form" aria-expanded="false" aria-controls="form" style="margin-bottom:10px;">
   Nuevo
 </button>
+<?= Html::a('<span class="fa fa-print"> Imprimir</span>',['articulo/imprimir'],['class'=>'btn btn-default pull-right'])?>
 <div class="collapse" id="form">
   <div class="well">
     <div class="Articulo-form">
@@ -57,12 +58,6 @@
                 <?php if($Articulo->estatus_did == 1){ echo Html::a('<span class="fa fa-trash-o"></span>',['articulo/cambiar','estatus'=>2,'id'=>$Articulo->id],['class'=>'btn btn-danger']);
             }else{echo Html::a('<span class="fa fa-recycle"></span>',['articulo/cambiar','estatus'=>1,'id'=>$Articulo->id],['class'=>'btn btn-success']);}?>
             </td></td>
-
-            
-
-
-
-           
         </tr>
         <?php }?>
     </tbody>

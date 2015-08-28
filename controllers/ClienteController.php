@@ -133,4 +133,12 @@ class ClienteController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+
+     public function actionImprimir() {
+    // get your HTML raw content without any layouts or scrip
+        $Empleado = Cliente::find()->all();
+        $pdf = Yii::$app->pdf;
+        $pdf->content = $this->renderPartial('_imprimir',['Cliente'=>$Cliente]);
+        return $pdf->render();
+    }
 }

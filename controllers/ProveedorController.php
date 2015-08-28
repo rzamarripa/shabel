@@ -133,4 +133,11 @@ class ProveedorController extends Controller
             throw new NotFoundHttpException('The requested page does not exist.');
         }
     }
+     public function actionImprimir() {
+    // get your HTML raw content without any layouts or scrip
+        $Proveedor = Proveedor::find()->all();
+        $pdf = Yii::$app->pdf;
+        $pdf->content = $this->renderPartial('_imprimir',['Proveedor'=>$Proveedor]);
+        return $pdf->render();
+    }
 }
