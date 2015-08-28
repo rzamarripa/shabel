@@ -5,6 +5,7 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\web\View;
+use app\models\USUARIOS;
 
 /* @var $this \yii\web\View */
 /* @var $content string */
@@ -99,7 +100,7 @@ AppAsset::register($this);
 		* 'container'         - boxed layout mode (non-responsive: will not work with fixed-navigation & fixed-ribbon)
 	-->
 	<body class="menu-on-top pace-done">
-
+		<?php $usuarioActual = USUARIOS::find()->where('id = :id',['id'=>Yii::$app->user->id])->one();?>
 		<!-- HEADER -->
 		<header id="header">
 			<div id="logo-group">
@@ -245,6 +246,8 @@ AppAsset::register($this);
 			<nav>
 				<ul>
 					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Cuadro de mando</span>',array("site/index")); ?></li>
+    				<?php if(!Yii::$app->user->isGuest){?>
+					<?php if($usuarioActual->username == 'hernan'){?>
        			    <li><a href="#"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Catalogos</span></a>
 	                    <ul>
 		                    <li><?= Html::a('Artículo', array("articulo/index")); ?></li>
@@ -256,7 +259,8 @@ AppAsset::register($this);
 		                    <li><?= Html::a('Orden Entrega', array("orden-entrega/index")); ?></li>
 	                    </ul>
                     </li>
-                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username == "dba"){ ?>
+                    <?php } ?>
+                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username == "zama"){ ?>
 		            		<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Nuevo Usuario</span>',array("site/signup")); ?></li>  
                     <?php } ?>
 					<?php /*
@@ -347,6 +351,7 @@ AppAsset::register($this);
 					*/ ?>
 				</ul>
 			</nav>
+			<?php } ?>
 			<span class="minifyme" data-action="minifyMenu"> 
 				<i class="fa fa-arrow-circle-left hit"></i> 
 			</span>

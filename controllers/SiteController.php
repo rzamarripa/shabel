@@ -135,7 +135,7 @@ class SiteController extends Controller
 
     public function actionSignup()
     {
-	    if(Yii::$app->user->identity->username == "dba"){
+	    if(Yii::$app->user->identity->username == "zama"){
 		    $model = new SignupForm();
 		    $empleado = new Empleado();
 		    if($model->load(Yii::$app->request->post()) && $empleado->load(Yii::$app->request->post())){		
