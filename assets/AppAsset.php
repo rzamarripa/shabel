@@ -9,23 +9,19 @@ namespace app\assets;
 
 use yii\web\AssetBundle;
 
-/**
- * @author Qiang Xue <qiang.xue@gmail.com>
- * @since 2.0
- */
+
 class AppAsset extends AssetBundle
 {
     public $basePath = '@webroot';
     public $baseUrl = '@web';
     public $css = [
       "css/bootstrap.min.css",
+      "css/datatable/dataTables.bootstrap.min.css",
+      "css/datatable/responsive.bootstrap.min.css",
       "css/font-awesome.min.css",
       "css/smartadmin-production-plugins.min.css",
       "css/smartadmin-production.min.css",
       "css/smartadmin-skins.min.css",
-      "css/smartadmin-rtl.min.css",
-      "css/select2.css",      
-      "css/datatable/dataTables.responsive.css",
     ];
     public $js = [
 	    "js/jquery.1.11.2.js",
@@ -58,11 +54,13 @@ class AppAsset extends AssetBundle
 	    "js/datatable/jquery.dataTables.min.js",
 	    "js/datatable/dataTables.bootstrap.js",
 	    "js/datatable/dataTables.responsive.js",
+	    "js/datatable/buttons.bootstrap.min.js",
 	    "js/angular/angular.js",
 	    "js/first.js",
 	    "js/uiselect2.js",
 	    "js/controllers/requisicion.js",
 	    "js/select2.min.js",
+	    
     ];
     public $depends = [
         'yii\web\YiiAsset',
