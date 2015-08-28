@@ -61,7 +61,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php $c=0; foreach ($Empleado as $empleado) {$c++;?> 
+        <?php $c=0; foreach ($Empleado as $empleado) {$c++; ?> 
         <tr>
             <td class='col-sm-1'><?= $c?></td>  
             <td><?= $empleado->nombre ?></td>        
@@ -75,12 +75,6 @@
                 <?php if($empleado->estatus_did == 1){ echo Html::a('<span class="fa fa-trash-o"></span>',['empleado/cambiar','estatus'=>2,'id'=>$empleado->id],['class'=>'btn btn-danger']);
             }else{echo Html::a('<span class="fa fa-recycle"></span>',['empleado/cambiar','estatus'=>1,'id'=>$empleado->id],['class'=>'btn btn-success']);}?>
             </td></td>
-
-            
-
-
-
-           
         </tr>
         <?php }?>
     </tbody>
