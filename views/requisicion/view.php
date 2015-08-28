@@ -2,7 +2,6 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
 ?>
 <div class="requisicion-view">
 
@@ -56,6 +55,4 @@ use yii\widgets\DetailView;
             </tr>
         </table>
     </div>
-</div>
-
 </div>

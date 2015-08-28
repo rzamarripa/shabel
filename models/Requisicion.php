@@ -90,7 +90,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getCotizacions()
+    public function getCotizacion()
     {
         return $this->hasMany(Cotizacion::className(), ['requisicion_did' => 'id']);
     }
@@ -98,7 +98,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getDetallerequisicions()
+    public function getDetallerequisicion()
     {
         return $this->hasMany(Detallerequisicion::className(), ['requisicion_did' => 'id']);
     }
@@ -130,7 +130,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getUsuarioA()
+    public function getUsuario()
     {
         return $this->hasOne(Usuarios::className(), ['id' => 'usuario_aid']);
     }
@@ -138,7 +138,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getSolicituds()
+    public function getSolicitud()
     {
         return $this->hasMany(Solicitud::className(), ['requisicion_did' => 'id']);
     }

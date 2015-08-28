@@ -19,7 +19,7 @@ AppAsset::register($this);
 		<meta charset="utf-8">
 		<!--<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">-->
 
-		<title> Desarrollo Urbano </title>
+		<title> GS - <?php echo $this->title; ?> </title>
 		<meta name="description" content="">
 		<meta name="author" content="">
 			
@@ -46,7 +46,7 @@ AppAsset::register($this);
 		<link rel="apple-touch-startup-image" href="<?php echo \Yii::$app->request->baseUrl; ?>/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
 		<link rel="apple-touch-startup-image" href="<?php echo \Yii::$app->request->baseUrl; ?>/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 		<link rel="apple-touch-startup-image" href="<?php echo \Yii::$app->request->baseUrl; ?>/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
-		<link rel="stylesheet" href="<?php echo Yii::getAlias('@vendor') ?> . '/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css'" media="print"
+		
 		<script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/jquery202.js"></script>
 	  <script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/jquery1.10.3.js"></script>
 	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
@@ -466,17 +466,34 @@ AppAsset::register($this);
 			<script type="text/javascript">
 					$('.tabla').DataTable({
 		        "lengthMenu": [[10,-1, 25, 50], [10,"Todos", 25, 50]],
-		        "language": {
+		        "language": {			       
 	            "lengthMenu": "Mostrar _MENU_ registros por página",
 	            "zeroRecords": "No se encontró coincidencia",
 	            "info": "_PAGE_ de _PAGES_",
 	            "infoEmpty": "No hay registros",
 	            "infoFiltered": "(Filtrar _MAX_ registros totales)",
 	            "search":"Buscar",
+	            "paginate": {
+					        "first":      "Primero",
+					        "last":       "Último",
+					        "next":       "Sig",
+					        "previous":   "Ant"
+					    },
+					    "aria": {
+					        "sortAscending":  ": activate to sort column ascending",
+					        "sortDescending": ": activate to sort column descending"
+					    },
+							"dom": 'T<"clear">lfrtip',
+			        "tableTools": {
+			            "sSwfPath": "/swf/copy_csv_xls_pdf.swf"
+			        },
+			        "buttons": [
+					        'copy', 'excel', 'pdf'
+					    ],
 		        },
 		        
 		       // order: [ 1, 'asc' ]
-		        'scrollX':true,
+		       // 'scrollX':true,
 		    	});
 	
 				  $('.select2').select2({

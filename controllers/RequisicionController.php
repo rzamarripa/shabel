@@ -70,8 +70,9 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
     {
         $detalleRequisicion = detalleRequisicion::find()->where('requisicion_did = :id',['id'=>$id])->all();
         return $this->render('view', [
-            'requisicion' => $this->findModel($id),
-        'detalleRequisicion'=>$detalleRequisicion]);
+					'requisicion' => $this->findModel($id),
+					'detalleRequisicion'=>$detalleRequisicion]
+				);
     }
 
     /**

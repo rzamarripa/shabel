@@ -10,7 +10,7 @@ use yii\widgets\Pjax;
  * @var app\models\RequisicionSearch $searchModel
  */
 
-$this->title = 'Requisicion';
+$this->title = 'Requisición';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
@@ -20,7 +20,8 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="collapse" id="form">
     <?= $this->render('_form',['model'=>$model]) ?>
 </div>
-<table class="table table-striped table-bordered tabla">
+
+<table class="table table-striped table-bordered tabla dt-responsive nowrap" cellspacing="0" width="100%">
   <thead>
     <tr>
       <th>No.</td>
