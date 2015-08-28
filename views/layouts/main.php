@@ -250,11 +250,11 @@ AppAsset::register($this);
 
        			    <li><a href="#"><i class="fa fa-lg fa-fw fa-user"></i> <span class="menu-item-parent">Usuario</span></a>
                      <ul>
-                    <li><?= Html::a('Articulo', array("articulo/index")); ?></li>
+                    <li><?= Html::a('Artículo', array("articulo/index")); ?></li>
                     <li><?= Html::a('Cliente', array("cliente/index")); ?></li>
                     <li><?= Html::a('Empleado', array("empleado/index")); ?></li>
                     <li><?= Html::a('Proveedor', array("proveedor/index")); ?></li>
-                    <li><?= Html::a('requisicion', array("requisicion/index")); ?></li>
+                    <li><?= Html::a('Requisición', array("requisicion/index")); ?></li>
                     
                     <li><?= Html::a('Orden Compra', array("orden-compra/index")); ?></li>
                     <li><?= Html::a('Orden Entrega', array("orden-entrega/index")); ?></li>

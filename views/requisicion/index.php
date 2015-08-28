@@ -23,6 +23,7 @@ $this->params['breadcrumbs'][] = $this->title;
 <table class="table table-striped table-bordered tabla">
   <thead>
     <tr>
+       <th>No.</th>
       <th>Folio</th>
       <th>Fecha</th>
       <th>Cliente</th>
@@ -31,8 +32,9 @@ $this->params['breadcrumbs'][] = $this->title;
     </tr>
   </thead>
   <tbody>
-    <?php foreach ($requisiciones as $req) { ?> 
+    <?php $c=0; foreach ($requisiciones as $req)$c++; { ?> 
     <tr>
+      <td class='col-sm-1'><?= $c?></td> 
       <td><?= $req->folio ?></td>
       <td><?= $req->fecha_f ?></td>
       <td><?= $req->cliente->nombre ?></td>

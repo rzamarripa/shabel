@@ -51,7 +51,7 @@
             <th>Apellidos</th>
             <th>Celular</th>
             <th>Puesto</th>
-            <th>Direccion</th>
+            <th>Dirección</th>
             <th>Acciones</th>
             
         </tr>

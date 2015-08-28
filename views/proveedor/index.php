@@ -47,8 +47,9 @@
    <table id="datatable" class="table table-striped table-bordered">
     <thead>
         <tr>
+            <th>No.</th>
             <th>Nombre</th>
-            <th>direccion</th>
+            <th>Dirección</th>
             <th>Contacto</th>
             <th>Telefono</th>
             <th>Correo</th>
@@ -57,8 +58,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($Proveedor as $Proveedor) {?> 
+        <?php $c=0; foreach ($Proveedor as $Proveedor) {$c++;?> 
         <tr>
+            <td class='col-sm-1'><?= $c?></td> 
             <td><?= $Proveedor->nombre ?></td>        
             <td><?= $Proveedor->direccion?></td>
             <td><?= $Proveedor->contacto?></td>               

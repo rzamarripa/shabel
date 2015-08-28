@@ -39,6 +39,7 @@
    <table id="datatable" class="table table-striped table-bordered">
     <thead>
         <tr>
+            <th>No.</th>
             <th>Nombre</th>
             <th>Unidad</th>
             <th>Acciones</th>
@@ -46,8 +47,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($Articulo as $Articulo) {?> 
+        <?php $c=0; foreach ($Articulo as $Articulo){ $c++; ?>
         <tr>
+            <td class='col-sm-1'><?= $c?></td>    
             <td><?= $Articulo->nombre ?></td>        
             <td><?= $Articulo->unidad?></td>
             <td>

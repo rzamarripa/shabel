@@ -39,6 +39,7 @@
    <table id="datatable" class="table table-striped table-bordered">
     <thead>
         <tr>
+            <th>No.</th>
             <th>Nombre</th>
             <th>direccion</th>
             <th>Contacto</th>
@@ -49,9 +50,10 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($Cliente as $cliente) {?> 
+        <?php $c=0; foreach ($Cliente as $cliente) { $c++;?> 
         <tr>
-            <td><?= $cliente->nombre ?></td>        
+            <td class='col-sm-1'><?= $c?></td>  
+             <td><?= $cliente->nombre?></td>             
             <td><?= $cliente->direccion?></td>
             <td><?= $cliente->telefono?></td>
             <td><?= $cliente->contacto?></td>
