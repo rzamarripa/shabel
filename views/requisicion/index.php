@@ -39,6 +39,7 @@ $this->params['breadcrumbs'][] = $this->title;
       <td><?= $req->comentarios ?></td>            
       <td>
       	<?= Html::a('<span class="fa fa-pencil"></span>',['requisicion/update','id'=>$req->id],['class'=>'btn btn-default btn-sm'])?>
+        <?= Html::a('cotizacion',['requisicion/index','id'=>$req->id],['class'=>'btn btn-primary btn-sm'])?>    
       </td>
     </tr>
     <?php }?>
