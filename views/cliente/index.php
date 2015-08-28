@@ -11,6 +11,8 @@
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form" aria-expanded="false" aria-controls="form" style="margin-bottom:10px;">
   Nuevo
 </button>
+<?= Html::a('<span class="fa fa-print"> Imprimir</span>',['cliente/imprimir'],['class'=>'btn btn-default pull-right'])?>
+
 <div class="collapse" id="form">
   <div class="well">
     <div class="Cliente-form">

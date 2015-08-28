@@ -204,5 +204,13 @@ class ArticuloController extends Controller
 				throw new CHttpException(404,'The requested page does not exist.');
 			return $model;
 		}
+
+    public function actionImprimir() {
+    // get your HTML raw content without any layouts or scrip
+        $articulos = Articulo::find()->all();
+        $pdf = Yii::$app->pdf;
+        $pdf->content = $this->renderPartial('_imprimir',['articulos'=>$articulos]);
+        return $pdf->render();
+    }
 }
 ?>
