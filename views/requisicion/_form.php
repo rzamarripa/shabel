@@ -30,8 +30,12 @@ use yii\web\View;
         <?php } ?>
     </script>
     <div class="requisicion-form well">
-        
-    <?php $form = ActiveForm::begin(); ?>
+        <?php if(isset($_GET['id'])){
+            $accion = ['requisicion/update?id='.$model->id];
+        }else{
+            $accion = ['requisicion/create'];
+        } ?>
+    <?php $form = ActiveForm::begin(['action'=>$accion]); ?>
         <div class="row">
             <div class="col-sm-2">
                 <?= $form->field($model, 'folio')->textInput(['maxlength' => true]) ?>

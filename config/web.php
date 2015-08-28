@@ -60,6 +60,7 @@ $config = [
 		        'format' => Pdf::FORMAT_A4,
 		        'orientation' => Pdf::ORIENT_PORTRAIT,
 		        'destination' => Pdf::DEST_BROWSER,
+                 'cssFile' => '@vendor/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css',
 		        // refer settings section for all configuration options
 		    ],
 		    'formatter' => [

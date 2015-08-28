@@ -45,6 +45,7 @@ AppAsset::register($this);
 		<link rel="apple-touch-startup-image" href="<?php echo \Yii::$app->request->baseUrl; ?>/img/splash/ipad-landscape.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:landscape)">
 		<link rel="apple-touch-startup-image" href="<?php echo \Yii::$app->request->baseUrl; ?>/img/splash/ipad-portrait.png" media="screen and (min-device-width: 481px) and (max-device-width: 1024px) and (orientation:portrait)">
 		<link rel="apple-touch-startup-image" href="<?php echo \Yii::$app->request->baseUrl; ?>/img/splash/iphone.png" media="screen and (max-device-width: 320px)">
+		<link rel="stylesheet" href="<?php echo Yii::getAlias('@vendor') ?> . '/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css'" media="print"
 		<script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/jquery202.js"></script>
 	  <script src="<?php echo \Yii::$app->request->baseUrl; ?>/js/jquery1.10.3.js"></script>
 	  <script src="https://maps.googleapis.com/maps/api/js?v=3.exp"></script>
@@ -464,11 +465,7 @@ AppAsset::register($this);
 	            "infoFiltered": "(Filtrar _MAX_ registros totales)",
 	            "search":"Buscar",
 		        },
-		        responsive: {
-	            details: {
-	              type: 'column'
-	            }
-		        },
+		        
 		       // order: [ 1, 'asc' ]
 		        'scrollX':true,
 		    	});
