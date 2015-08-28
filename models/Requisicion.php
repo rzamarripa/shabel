@@ -122,7 +122,7 @@ class Requisicion extends \yii\db\ActiveRecord
     /**
      * @return \yii\db\ActiveQuery
      */
-    public function getEstatusD()
+    public function getEstatus()
     {
         return $this->hasOne(Estatus::className(), ['id' => 'estatus_did']);
     }

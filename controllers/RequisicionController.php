@@ -50,9 +50,10 @@ class RequisicionController extends Controller
      */
     public function actionView($id)
     {
+        $detalleRequisicion = detalleRequisicion::find()->where('requisicion_did = :id',['id'=>$id])->all();
         return $this->render('view', [
-            'model' => $this->findModel($id),
-        ]);
+            'requisicion' => $this->findModel($id),
+        'detalleRequisicion'=>$detalleRequisicion]);
     }
 
     /**

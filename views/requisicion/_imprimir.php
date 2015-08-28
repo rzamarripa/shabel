@@ -4,14 +4,14 @@
 		<table class="table table-condensed table-bordered">			
 			<tbody>
 				<tr>
-					<td ><strong>Cliente</strong></td>
-					<td class="col-sm-2"><strong>Departamento</strong></td>
-					<td class="col-sm-2"><strong>Folio: </strong><?php echo $requisicion->folio; ?></td>
+					<td><strong>Cliente</strong></td>
+					<td><strong>Departamento</strong></td>
+					<td><strong>Folio: </strong><?php echo $requisicion->folio; ?></td>
 				</tr>
 				<tr>
-					<td><?php echo $requisicion->cliente->nombre; ?></td>
-					<td><?php echo $requisicion->departamento; ?></td>
-					<td><strong>Fecha: </strong><?php echo date("d-m-Y", strtotime($requisicion->fecha_f)); ?></td>
+					<td style="width:38%;"><?php echo $requisicion->cliente->nombre; ?></td>
+					<td style="width:38%;"><?php echo $requisicion->departamento; ?></td>
+					<td style="width:24%;"><strong>Fecha: </strong><?php echo date("d-m-Y", strtotime($requisicion->fecha_f)); ?></td>
 				</tr>
 				<tr>
 					
@@ -35,19 +35,19 @@
 			<tbody>
 				<?php $c=0; foreach($detalleRequisicion as $detalle){ $c++;?>
 				<tr>
-					<td><?php echo $c;?></td>	
-					<td><?php echo $detalle->cantidad;?></td>	
-					<td><?php echo $detalle->articulo->nombre;?></td>
-					<td><?php echo $detalle->articulo->unidad;?></td>
-					<td><?php echo $detalle->comentarios;?></td>				
+					<td style="width:10%;"><?php echo $c;?></td>	
+					<td style="width:15%;"><?php echo $detalle->cantidad;?></td>	
+					<td style="width:25%;"><?php echo $detalle->articulo->nombre;?></td>
+					<td style="width:15%;"><?php echo $detalle->articulo->unidad;?></td>
+					<td style="width:35%;"><?php echo $detalle->comentarios;?></td>				
 				</tr>
 				<?php } ?>
 			</tbody>
 		</table>
 		<table class="table table-bordered table-condensed">
 			<tr>
-				<td class="col-lg-2"><strong>Comentario</strong></td>
-				<td style="width:20%;" class="col-lg-10"><?php echo $requisicion->comentarios; ?></td>
+				<td style="width:20%;"><strong>Comentarios</strong></td>
+				<td style="width:80%;" class="col-lg-10"><?php echo $requisicion->comentarios; ?></td>
 			</tr>
 		</table>
 	</div>
