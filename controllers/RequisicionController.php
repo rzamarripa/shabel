@@ -212,12 +212,12 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
 	    echo json_encode($result);
 	    Yii::app()->end();
 	}
+
     public function actionImprimir($id) {
     // get your HTML raw content without any layouts or scripts
         $requisicion = Requisicion::find()->where('id = :id',['id'=>$id])->one();
         $detalleRequisicion = detalleRequisicion::find()->where('requisicion_did = :id',['id'=>$id])->all();
         $pdf = Yii::$app->pdf;
-        $pdf->cssFile = Yii::getAlias('@vendor') . "/kartik-v/yii2-mpdf/assets/kv-mpdf-bootstrap.min.css";
         $pdf->content = $this->renderPartial('_imprimir',['detalleRequisicion'=>$detalleRequisicion,'requisicion'=>$requisicion]);
         return $pdf->render();
     }

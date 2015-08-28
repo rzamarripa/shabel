@@ -21,9 +21,6 @@ use yii\widgets\DetailView;
                     <td style="width:38%;"><?php echo $requisicion->departamento; ?></td>
                     <td style="width:24%;"><strong>Fecha: </strong><?php echo date("d-m-Y", strtotime($requisicion->fecha_f)); ?></td>
                 </tr>
-                <tr>
-                    
-                </tr>
             </tbody>
         </table>
     </div>
