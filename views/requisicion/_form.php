@@ -39,6 +39,8 @@ use yii\web\View;
         <div class="row">
             <div class="col-sm-2">
                 <?= $form->field($model, 'folio')->textInput(['maxlength' => true]) ?>
+                <?php if(!$model->isNewRecord){echo $form->field($model, 'estatus_did')->hiddenInput()->label(false);} ?>
+                <?php if(!$model->isNewRecord){echo $form->field($model, 'usuario_aid')->hiddenInput()->label(false);} ?>
             </div>
             <div class="col-sm-4">
                 <?= $form->field($model, 'cliente_did')->dropDownList(ArrayHelper::map(app\models\Cliente::find()->asArray()->all(), 'id', 'nombre'), ["prompt"=>"Seleccione"]) ?>

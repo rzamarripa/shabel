@@ -80,14 +80,8 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
      * @return mixed
      */
     public function actionCreate()
-    {
-	    
-	
-                                                                                                            
-		
+    {                                                                                               
         $model = new Requisicion();
-       
-
         if(isset($_POST['Requisicion']) && isset($_POST['detalle']))
         {
          try
@@ -134,10 +128,6 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
    catch(Exception $e)
    {
     $transaction->rollBack();
-
-    echo '<pre>';print_r($e); echo "</pre>";
-    echo '<pre>';print_r($_POST); echo "</pre>";
-    exit;
        }
       }
     }
@@ -145,16 +135,64 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
     public function actionUpdate($id)
     {
         $model = $this->findModel($id);
-        
-		$detalle = DetalleRequisicion::find()->asArray()->where("requisicion_did = " . $id)->all();
-        if ($model->load(Yii::$app->request->post()) && $model->save()) {
-            return $this->redirect(['view', 'id' => $model->id]);
-        } else {
+        if(isset($_POST['Requisicion']))
+        {
+            $conection = Yii::$app->db;
+            try
+            {
+                $requisicion = $_POST['Requisicion'];
+                $conection = Yii::$app->db;
+                $transaction = $conection->beginTransaction();
+                $comandoRequisicion = $conection->createCommand("UPDATE Requisicion SET
+                    folio = :folio,
+                    fecha_f = :fecha_f,
+                    cliente_did = :cliente_did,
+                    departamento = :departamento,
+                    comentarios = :comentarios,
+                    estatus_did = :estatus_did,
+                    usuario_aid = :usuario_aid
+                    WHERE id = " . $id);
+                $comandoRequisicion->bindValue(":folio", $requisicion['folio'],PDO::PARAM_STR);
+                $comandoRequisicion->bindValue(":fecha_f",$requisicion['fecha_f'],PDO::PARAM_STR);
+                $comandoRequisicion->bindValue(":cliente_did",$requisicion['cliente_did'],PDO::PARAM_INT);
+                $comandoRequisicion->bindValue(":departamento",$requisicion['departamento'],PDO::PARAM_STR);
+                $comandoRequisicion->bindValue(":comentarios",$requisicion['comentarios'],PDO::PARAM_STR);
+                $comandoRequisicion->bindValue(":estatus_did",$requisicion['estatus_did'],PDO::PARAM_INT);
+                $comandoRequisicion->bindValue(":usuario_aid",$requisicion['usuario_aid'],PDO::PARAM_INT);
+                $comandoRequisicion->execute();
+                    $detalleRequisicion = $_POST['detalle'];
+                    $comandoEliminaDetalle = $conection->createCommand("DELETE FROM DetalleRequisicion WHERE requisicion_did = " . $id);
+                    $comandoEliminaDetalle->execute();
+                    foreach($detalleRequisicion as $detalle)
+                    {
+                        $comandoInsertaDetalle = $conection->createCommand("INSERT INTO DetalleRequisicion
+                            (cantidad, articulo_aid, comentarios, requisicion_did)
+                            VALUES(:cantidad, :articulo_aid, :comentarios, :requisicion_did)");
+                        $comandoInsertaDetalle->bindValue(":cantidad", $detalle['cantidad'],PDO::PARAM_STR);
+                        $comandoInsertaDetalle->bindValue(":articulo_aid",$detalle['articulo'],PDO::PARAM_STR);
+                        $comandoInsertaDetalle->bindValue(":comentarios",$detalle['comentarios'],PDO::PARAM_STR);
+                        $comandoInsertaDetalle->bindValue(":requisicion_did",$id,PDO::PARAM_STR);
+                        $comandoInsertaDetalle->execute();
+                    }
+
+                $conection->createCommand("INSERT INTO Actividad (descripcion, usuario) Values ('Ha actualizado una requisición', '" . Yii::$app->user->id . "')")->execute();
+                $transaction->commit();
+                $this->redirect(array('view','id'=>$id));
+            }
+            catch(Exception $e)
+            {
+                echo '<pre>';print_r($e); echo "</pre>";
+                exit;
+                $transaction->rollBack();
+                Yii::$app->user->setFlash('warning', '<strong>Hubo un error al actualizar la requisición!</strong>');
+            }
+        }else{
+        $detalle = DetalleRequisicion::find()->asArray()->where("requisicion_did = " . $id)->all();
             return $this->render('update', [
                 'model' => $model,
                 'detalle'=> $detalle,
             ]);
-        }
+        }    
     }
 
     /**
