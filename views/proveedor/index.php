@@ -17,6 +17,9 @@
     <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form" aria-expanded="false" aria-controls="form" style="margin-bottom:10px;">
   Nuevo
 </button>
+
+<?= Html::a('<span class="fa fa-print"> Imprimir</span>',['proveedor/imprimir'],['class'=>'btn btn-default pull-right'])?>
+
 <div class="collapse" id="form">
   <div class="well">
     <div class="Cliente-form">
@@ -47,8 +50,9 @@
    <table id="datatable" class="table table-striped table-bordered">
     <thead>
         <tr>
+            <th>No.</th>
             <th>Nombre</th>
-            <th>direccion</th>
+            <th>Dirección</th>
             <th>Contacto</th>
             <th>Telefono</th>
             <th>Correo</th>
@@ -57,8 +61,9 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($Proveedor as $Proveedor) {?> 
+        <?php $c=0; foreach ($Proveedor as $Proveedor) {$c++;?> 
         <tr>
+            <td class='col-sm-1'><?= $c?></td> 
             <td><?= $Proveedor->nombre ?></td>        
             <td><?= $Proveedor->direccion?></td>
             <td><?= $Proveedor->contacto?></td>               

@@ -2,77 +2,57 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-
-/* @var $this yii\web\View */
-/* @var $model app\models\Requisicion */
-
-$this->title = "Requisición";
-$this->params['breadcrumbs'][] = ['label' => 'Requisición', 'url' => ['index']];
-$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="requisicion-view">
 
-    <h1><?= "Requisición: " . Html::encode($model->folio) . " de " . Html::encode($model->cliente->nombre) ?></h1>
-
-    <p>
-        <?= Html::a('Actualizar', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?php /* Html::a('Delete', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Are you sure you want to delete this item?',
-                'method' => 'post',
-            ],
-        ]) */?>
-    </p>
-
-    <?= DetailView::widget([
-        'model' => $model,
-        'attributes' => [
-            'id',
-            'folio',
-            [
-	            "attribute"=>"fecha_f",
-	            "value"=>date("d-m-Y", strtotime($model->fecha_f)),
-            ],
-            [
-	            "attribute"=>"cliente_did",
-	            "value"=>$model->cliente->nombre,
-            ],
-            'departamento',
-            'comentarios:ntext',
-            [
-	            "attribute"=>"estatus_did",
-	            "value"=>$model->estatus->nombre,
-            ],
-            [
-	            "attribute"=>"usuario_aid",
-	            "value"=>$model->usuario->username,
-            ],
-        ],
-    ]) ?>
-    
-    
-    <table class="table table-striped table-bordered tabla dt-responsive nowrap" cellspacing="0" width="100%">
-		  <thead>
-		    <tr>
-		      <th>Cantidad</th>
-		      <th>Artículo</th>
-		      <th>Comentarios</th>            
-		      <th>Acciones</th>   
-		    </tr>
-		  </thead>
-		  <tbody>
-		    <?php foreach ($detalle as $req) { ?> 
-		    <tr>
-		      <td><?= $req->cantidad ?></td>
-		      <td><?= $req->articulo->nombre ?></td>
-		      <td><?= $req->comentarios ?></td>
-		      <td>
-		      	<?= Html::a('<span class="fa fa-pencil"></span>',['requisicion/update','id'=>$req->id],['class'=>'btn btn-default btn-sm'])?>
-		      </td>
-		    </tr>
-		    <?php }?>
-		  </tbody>
-		</table>
-
+<h2>Requisición</h2>
+<div class="row">
+    <div class="col-sm-12">
+        <table class="table table-condensed table-bordered">            
+            <tbody>
+                <tr>
+                    <td><strong>Cliente</strong></td>
+                    <td><strong>Departamento</strong></td>
+                    <td><strong>Folio: </strong><?php echo $requisicion->folio; ?></td>
+                </tr>
+                <tr>
+                    <td style="width:38%;"><?php echo $requisicion->cliente->nombre; ?></td>
+                    <td style="width:38%;"><?php echo $requisicion->departamento; ?></td>
+                    <td style="width:24%;"><strong>Fecha: </strong><?php echo date("d-m-Y", strtotime($requisicion->fecha_f)); ?></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+<div class="row">   
+    <div class="col-sm-12">     
+        <table class="table table-striped table-bordered table-hover table-condensed">
+            <thead class="thead">
+                <tr>
+                    <th>No.</th>
+                    <th>Cantidad</th>
+                    <th>Artículo</th>
+                    <th>Unidad</th>
+                    <th>Observaciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php $c=0; foreach($detalleRequisicion as $detalle){ $c++;?>
+                <tr>
+                    <td style="width:10%;"><?php echo $c;?></td>    
+                    <td style="width:15%;"><?php echo $detalle->cantidad;?></td>    
+                    <td style="width:25%;"><?php echo $detalle->articulo->nombre;?></td>
+                    <td style="width:15%;"><?php echo $detalle->articulo->unidad;?></td>
+                    <td style="width:35%;"><?php echo $detalle->comentarios;?></td>             
+                </tr>
+                <?php } ?>
+            </tbody>
+        </table>
+        <table class="table table-bordered table-condensed">
+            <tr>
+                <td style="width:20%;"><strong>Comentarios</strong></td>
+                <td style="width:80%;" class="col-lg-10"><?php echo $requisicion->comentarios; ?></td>
+            </tr>
+        </table>
+    </div>
 </div>
