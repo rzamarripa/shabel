@@ -247,7 +247,7 @@ AppAsset::register($this);
 				<ul>
 					<li><?= Html::a('<i class="fa fa-lg fa-fw fa-home"></i> <span class="menu-item-parent">Cuadro de mando</span>',array("site/index")); ?></li>
     				<?php if(!Yii::$app->user->isGuest){?>
-					<?php if($usuarioActual->username == 'hernan'){?>
+					<?php if($usuarioActual->username == 'hernan' or $usuarioActual->username == 'zama'){?>
        			    <li><a href="#"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Catalogos</span></a>
 	                    <ul>
 		                    <li><?= Html::a('Artículo', array("articulo/index")); ?></li>

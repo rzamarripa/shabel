@@ -11,6 +11,9 @@ use yii\filters\VerbFilter;
 use yii\db\mssql\PDO;
 use app\models\DetalleRequisicion;
 use kartik\mpdf\Pdf;
+use app\models\ReqPorProveedor;
+use app\models\Proveedor;
+use yii\helpers\ArrayHelper;
 
 /**
  * RequisicionController implements the CRUD actions for Requisicion model.
@@ -259,5 +262,22 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
         $pdf = Yii::$app->pdf;
         $pdf->content = $this->renderPartial('_imprimir',['detalleRequisicion'=>$detalleRequisicion,'requisicion'=>$requisicion]);
         return $pdf->render();
+    }
+    public function actionEnviarRequisicion($id)
+    {
+
+        $model = new ReqPorProveedor;
+        if(isset($_POST['proveedor'])){
+            $proveedores = $_POST['proveedor'];
+            foreach ($proveedores as $proveedor) {
+                $model = new ReqPorProveedor;
+                $model->requisicion_did = $id;
+                $model->proveedor_did = $proveedor;
+                $model->save();
+            }
+            return $this->redirect(['requisicion/index']); 
+        }
+        $data = ArrayHelper::map(Proveedor::find()->asArray()->all(), 'id', 'nombre');
+        return $this->render('enviar-requisicion',['model'=>$model,'data'=>$data,'id'=>$id]);
     }
 }

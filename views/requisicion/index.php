@@ -51,7 +51,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <li><?= Html::a('<span class="fa fa-eye"> Ver</span>',['requisicion/view','id'=>$req->id])?></li>
             <li><?= Html::a('<span class="fa fa-pencil"> Editar</span>',['requisicion/update','id'=>$req->id])?></li>
             <li><?= Html::a('<span class="fa fa-print"> Imprimir</span>',['requisicion/imprimir','id'=>$req->id])?></li>
-            <li><?= Html::a('<span class="fa fa-paper-plane"> Cotizar</span>',['requisicion/cotizar','id'=>$req->id])?></li>
+            <li><?= Html::a('<span class="fa fa-paper-plane"> Cotizar</span>',['requisicion/enviar-requisicion','id'=>$req->id])?></li>
           </ul>
         </div>
       </td>
