@@ -50,8 +50,9 @@ $this->params['breadcrumbs'][] = $this->title;
           <ul class="dropdown-menu">
             <li><?= Html::a('<span class="fa fa-eye"> Ver</span>',['requisicion/view','id'=>$req->id])?></li>
             <li><?= Html::a('<span class="fa fa-pencil"> Editar</span>',['requisicion/update','id'=>$req->id])?></li>
-            <li><?= Html::a('<span class="fa fa-print"> Imprimir</span>',['requisicion/imprimir','id'=>$req->id])?></li>
-            <li><?= Html::a('<span class="fa fa-paper-plane"> Cotizar</span>',['requisicion/enviar-requisicion','id'=>$req->id])?></li>
+            <li><?= Html::a('<span class="fa fa-print"> Imprimir</span>',['requisicion/imprimir','id'=>$req->id],['target'=>'_blank'])?></li>
+            <li><?= Html::a('<span class="fa fa-paper-plane"> Enviar</span>',['requisicion/enviar-requisicion','id'=>$req->id])?></li>
+            <li><?= Html::a('<span class="fa fa-paper"> Cotizar</span>',['cotizacion/create','id'=>$req->id])?></li>
           </ul>
         </div>
       </td>

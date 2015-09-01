@@ -50,9 +50,9 @@ use yii\web\View;
             </div>
             <div class="col-sm-2">
                 <?= $form->field($model, 'fecha_f')->widget(\yii\jui\DatePicker::classname(), [
-    //'language' => 'ru',
-    'dateFormat' => 'yyyy-MM-dd',
-])->textInput() ?>
+                    //'language' => 'ru',
+                    'dateFormat' => 'yyyy-MM-dd',
+                ])->textInput() ?>
             </div>
         </div>
         

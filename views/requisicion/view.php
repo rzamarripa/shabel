@@ -4,7 +4,7 @@ use yii\helpers\Html;
 use yii\widgets\DetailView;
 ?>
 <div class="requisicion-view">
-
+<?= Html::a('Imprimir',['imprimir','id'=>$requisicion->id],['class'=>'btn btn-default pull-right','target'=>'_blank']); ?>
 <h2>Requisición</h2>
 <div class="row">
     <div class="col-sm-12">
