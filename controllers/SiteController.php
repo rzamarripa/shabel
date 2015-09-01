@@ -72,6 +72,7 @@ class SiteController extends Controller
 					$model = new LoginForm();
 					
 					if ($model->load(Yii::$app->request->post()) && $model->login()) {
+                        Yii::$app->session->set('empresa_did',1);
 						return $this->render('index');
 					} else {
 						return $this->render('login', [
@@ -106,7 +107,6 @@ class SiteController extends Controller
     public function actionLogout()
     {
         Yii::$app->user->logout();
-
         return $this->goHome();
     }
 

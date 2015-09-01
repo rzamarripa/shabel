@@ -40,7 +40,7 @@ class RequisicionController extends Controller
     {
         $model = new Requisicion();
         $model->fecha_f = date("Y-m-d");
-        $requisiciones = Requisicion::find()->all();
+        $requisiciones = Requisicion::find()->where('empresa_did=:empresaId',['empresaId'=>Yii::$app->session->get('empresa_did')])->all();
         return $this->render('index', [
             'model'=>$model,'requisiciones'=>$requisiciones
         ]);
@@ -95,9 +95,9 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
     $transaction = $conection->beginTransaction();
     $comandoRequisicion = $conection->createCommand("INSERT INTO Requisicion
      (folio, fecha_f, cliente_did, departamento,
-     comentarios, estatus_did, usuario_aid)
+     comentarios, estatus_did, usuario_aid, empresa_did)
      VALUES (:folio, :fecha_f, :cliente_did, :departamento,
-     :comentarios, :estatus_did, :usuario_aid)");
+     :comentarios, :estatus_did, :usuario_aid, :empresa_did)");
     $comandoRequisicion->bindValue(":folio", $requisicion['folio'],PDO::PARAM_STR);
     $comandoRequisicion->bindValue(":fecha_f",$requisicion['fecha_f'],PDO::PARAM_STR);
     $comandoRequisicion->bindValue(":cliente_did",$requisicion['cliente_did'],PDO::PARAM_INT);
@@ -105,6 +105,7 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
     $comandoRequisicion->bindValue(":comentarios",$requisicion['comentarios'],PDO::PARAM_STR);
     $comandoRequisicion->bindValue(":estatus_did",1,PDO::PARAM_INT);
     $comandoRequisicion->bindValue(":usuario_aid",Yii::$app->user->id,PDO::PARAM_INT);
+    $comandoRequisicion->bindValue(":empresa_did",Yii::$app->session->get('empresa_did'),PDO::PARAM_INT);
     if($comandoRequisicion->execute())
     {
      $requisicionId = Requisicion::find()->orderBy("id DESC")->one();
@@ -154,7 +155,8 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
                     departamento = :departamento,
                     comentarios = :comentarios,
                     estatus_did = :estatus_did,
-                    usuario_aid = :usuario_aid
+                    usuario_aid = :usuario_aid,
+                    empresa_did = :empresa_did
                     WHERE id = " . $id);
                 $comandoRequisicion->bindValue(":folio", $requisicion['folio'],PDO::PARAM_STR);
                 $comandoRequisicion->bindValue(":fecha_f",$requisicion['fecha_f'],PDO::PARAM_STR);
@@ -163,6 +165,7 @@ $requisicion = requisicion::find()->where('requisicion_did = :requisicion_did',[
                 $comandoRequisicion->bindValue(":comentarios",$requisicion['comentarios'],PDO::PARAM_STR);
                 $comandoRequisicion->bindValue(":estatus_did",$requisicion['estatus_did'],PDO::PARAM_INT);
                 $comandoRequisicion->bindValue(":usuario_aid",$requisicion['usuario_aid'],PDO::PARAM_INT);
+                $comandoRequisicion->bindValue(":empresa_did",Yii::$app->session->get('empresa_did'),PDO::PARAM_INT);
                 $comandoRequisicion->execute();
                     $detalleRequisicion = $_POST['detalle'];
                     $comandoEliminaDetalle = $conection->createCommand("DELETE FROM DetalleRequisicion WHERE requisicion_did = " . $id);

@@ -142,4 +142,8 @@ class Requisicion extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Solicitud::className(), ['requisicion_did' => 'id']);
     }
+    public function getEmpresa()
+    {
+        return $this->hasOne(Empresa::className(), ['id' => 'empresa_did']);
+    }
 }

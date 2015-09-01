@@ -15,7 +15,6 @@ use app\models\USUARIOS;
         <div class="row">
             <div class="col-lg-12">
 	            Grupo Shabel
-                
             </div>           
         </div>
     </div>

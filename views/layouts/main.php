@@ -6,7 +6,8 @@ use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use yii\web\View;
 use app\models\USUARIOS;
-
+use yii\web\Session;
+use app\models\Empresa;
 /* @var $this \yii\web\View */
 /* @var $content string */
 
@@ -260,9 +261,16 @@ AppAsset::register($this);
 	                    </ul>
                     </li>
                     <?php } ?>
-                    <?php if(!Yii::$app->user->isGuest && Yii::$app->user->identity->username == "zama"){ ?>
+                    <?php if(Yii::$app->user->identity->username == "zama"){ ?>
 		            		<li><?= Html::a('<i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Nuevo Usuario</span>',array("site/signup")); ?></li>  
                     <?php } ?>
+                    <li><a href="#"><i class="fa fa-lg fa-fw fa-tasks"></i> <span class="menu-item-parent">Empresa</span></a>
+	                    <ul>
+	                    	<?php $empresas = Empresa::find()->all(); foreach ($empresas as $empresa) {?>
+		                    <li><?= Html::a($empresa->nombre, array("empresa/cambiar", 'id'=>$empresa->id)); ?></li>
+		                    <?php } ?>
+	                    </ul>
+                    </li>
 					<?php /*
 					<li>
 						<a href="#"><i class="fa fa-lg fa-fw fa-inbox"></i> <span class="menu-item-parent">Requi</span></a>
