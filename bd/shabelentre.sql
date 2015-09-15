@@ -1,0 +1,597 @@
+/*
+Navicat MySQL Data Transfer
+
+Source Server         : local
+Source Server Version : 50616
+Source Host           : localhost:3306
+Source Database       : shabel
+
+Target Server Type    : MYSQL
+Target Server Version : 50616
+File Encoding         : 65001
+
+Date: 2015-09-15 11:19:34
+*/
+
+SET FOREIGN_KEY_CHECKS=0;
+
+-- ----------------------------
+-- Table structure for `actividad`
+-- ----------------------------
+DROP TABLE IF EXISTS `actividad`;
+CREATE TABLE `actividad` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `modulo` varchar(20) DEFAULT NULL,
+  `descripcion` text,
+  `usuario` varchar(10) DEFAULT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of actividad
+-- ----------------------------
+INSERT INTO `actividad` VALUES ('1', null, 'Ha creado una requisición', '1', '2015-08-25 14:51:37');
+INSERT INTO `actividad` VALUES ('2', null, 'Ha creado una requisición', '1', '2015-08-25 14:56:41');
+INSERT INTO `actividad` VALUES ('3', null, 'Ha creado una requisición', '1', '2015-08-25 15:27:09');
+INSERT INTO `actividad` VALUES ('4', null, 'Ha creado una requisición', '1', '2015-08-25 15:39:05');
+INSERT INTO `actividad` VALUES ('5', null, 'Ha creado una requisición', '1', '2015-08-25 15:40:25');
+INSERT INTO `actividad` VALUES ('6', null, 'Ha creado una requisición', '1', '2015-08-27 18:59:31');
+INSERT INTO `actividad` VALUES ('7', null, 'Ha creado una requisición', '1', '2015-08-27 19:05:07');
+INSERT INTO `actividad` VALUES ('8', null, 'Ha actualizado una requisición', '1', '2015-08-27 23:57:03');
+INSERT INTO `actividad` VALUES ('9', null, 'Ha actualizado una requisición', '1', '2015-08-27 23:57:44');
+INSERT INTO `actividad` VALUES ('10', null, 'Ha actualizado una requisición', '1', '2015-08-27 23:58:02');
+INSERT INTO `actividad` VALUES ('11', null, 'Ha creado una requisición', '1', '2015-08-28 17:08:27');
+INSERT INTO `actividad` VALUES ('12', null, 'Ha creado una requisición', '1', '2015-08-28 17:09:41');
+INSERT INTO `actividad` VALUES ('13', null, 'Ha creado una requisición', '1', '2015-09-01 15:16:18');
+INSERT INTO `actividad` VALUES ('14', null, 'Ha actualizado una requisición', '1', '2015-09-01 15:18:00');
+INSERT INTO `actividad` VALUES ('15', null, 'Ha creado una requisición', '1', '2015-09-03 15:41:37');
+INSERT INTO `actividad` VALUES ('16', null, 'Ha creado una requisición', '1', '2015-09-05 13:22:51');
+INSERT INTO `actividad` VALUES ('17', null, 'Ha creado una requisición', '1', '2015-09-15 11:00:21');
+
+-- ----------------------------
+-- Table structure for `articulo`
+-- ----------------------------
+DROP TABLE IF EXISTS `articulo`;
+CREATE TABLE `articulo` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(200) NOT NULL DEFAULT '',
+  `unidad` varchar(50) NOT NULL DEFAULT '',
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `articulo_estatus` (`estatus_did`),
+  CONSTRAINT `articulo_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of articulo
+-- ----------------------------
+INSERT INTO `articulo` VALUES ('1', 'Laptop Hp', 'pza', '1', '2015-08-25 14:24:10');
+INSERT INTO `articulo` VALUES ('2', 'Laptop Dell', 'pza', '1', '2015-08-25 14:45:11');
+INSERT INTO `articulo` VALUES ('3', 'MacBook Pro', 'pza', '1', '2015-08-27 18:47:21');
+INSERT INTO `articulo` VALUES ('5', 'MacBook Air', 'pza', '1', '2015-09-01 12:08:26');
+INSERT INTO `articulo` VALUES ('7', 'AlienWare 14', 'pza', '1', '2015-09-01 12:08:46');
+INSERT INTO `articulo` VALUES ('8', 'AlienWare 15', 'pza', '1', '2015-09-01 12:08:56');
+INSERT INTO `articulo` VALUES ('9', 'Laptop MSI Viper', 'pza', '1', '2015-09-01 12:09:15');
+
+-- ----------------------------
+-- Table structure for `cliente`
+-- ----------------------------
+DROP TABLE IF EXISTS `cliente`;
+CREATE TABLE `cliente` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL DEFAULT '',
+  `direccion` text,
+  `contacto` varchar(100) DEFAULT '',
+  `telefono` varchar(12) DEFAULT '',
+  `telefono1` varchar(12) DEFAULT NULL,
+  `correo` varchar(50) DEFAULT '',
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `proveedor_estatus` (`estatus_did`),
+  CONSTRAINT `cliente_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cliente
+-- ----------------------------
+INSERT INTO `cliente` VALUES ('1', 'uss', 'uss', 'dvwefv', '234234', '234234', 'ervrt@wfeerf', '1', '2015-08-19 14:06:35');
+INSERT INTO `cliente` VALUES ('2', 'Masoft', 'Enrique segobiano', 'Roberto Zamaripa', '761256315623', null, 'zama.rripa@gmail.com', '1', '2015-08-27 18:44:54');
+
+-- ----------------------------
+-- Table structure for `configuracion`
+-- ----------------------------
+DROP TABLE IF EXISTS `configuracion`;
+CREATE TABLE `configuracion` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `mantenimiento` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of configuracion
+-- ----------------------------
+INSERT INTO `configuracion` VALUES ('1', '0');
+
+-- ----------------------------
+-- Table structure for `cotizacion`
+-- ----------------------------
+DROP TABLE IF EXISTS `cotizacion`;
+CREATE TABLE `cotizacion` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `folio` varchar(20) NOT NULL DEFAULT '',
+  `fecha_f` date NOT NULL,
+  `porcentaje` float DEFAULT NULL,
+  `subtotal` float NOT NULL,
+  `iva` float NOT NULL,
+  `total` float NOT NULL,
+  `usuario_aid` int(11) unsigned NOT NULL,
+  `empresa_did` int(11) unsigned NOT NULL,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `requisicion_did` int(11) unsigned NOT NULL,
+  `cliente_did` int(11) unsigned NOT NULL,
+  `comentarios` text,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `cotizacion_estatus` (`estatus_did`),
+  KEY `cotizacion_cliente` (`cliente_did`),
+  KEY `cotizacion_requisicion` (`requisicion_did`),
+  CONSTRAINT `cotizacion_cliente` FOREIGN KEY (`cliente_did`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `cotizacion_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `cotizacion_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of cotizacion
+-- ----------------------------
+INSERT INTO `cotizacion` VALUES ('5', '12345', '2015-09-05', '10', '3020', '483.2', '3503.2', '1', '1', '1', '21', '2', 'sinco', '2015-09-05 13:20:42');
+
+-- ----------------------------
+-- Table structure for `detallecotizacion`
+-- ----------------------------
+DROP TABLE IF EXISTS `detallecotizacion`;
+CREATE TABLE `detallecotizacion` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `articulo_aid` int(11) unsigned NOT NULL,
+  `preciounitario` float NOT NULL,
+  `importe` float NOT NULL,
+  `porcentaje` float DEFAULT NULL,
+  `cotizacion_did` int(11) unsigned NOT NULL,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `comentarios` text,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `proveedor_aid` int(11) unsigned NOT NULL,
+  `preciounitariofinal` float(11,0) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `detallerequisicion_articulo` (`articulo_aid`),
+  KEY `detallerequisicion_requisicion` (`cotizacion_did`),
+  KEY `detallerequisicion_estatus` (`estatus_did`),
+  CONSTRAINT `detallecotizacion_cotizacion` FOREIGN KEY (`cotizacion_did`) REFERENCES `cotizacion` (`id`),
+  CONSTRAINT `detallecotizacion_ibfk_1` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `detallecotizacion_ibfk_2` FOREIGN KEY (`articulo_aid`) REFERENCES `articulo` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of detallecotizacion
+-- ----------------------------
+INSERT INTO `detallecotizacion` VALUES ('6', '12', '1', '100', '1920', '50', '5', '1', 'otro comentario', '2015-09-05 13:20:42', '4', '160');
+INSERT INTO `detallecotizacion` VALUES ('7', '5', '2', '200', '1100', '0', '5', '1', 'sin comentarios', '2015-09-05 13:20:42', '3', '220');
+
+-- ----------------------------
+-- Table structure for `detalleordencompra`
+-- ----------------------------
+DROP TABLE IF EXISTS `detalleordencompra`;
+CREATE TABLE `detalleordencompra` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `articulo_aid` int(11) unsigned NOT NULL,
+  `comentarios` text,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `ordencompra_did` int(11) unsigned NOT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `detallerequisicion_articulo` (`articulo_aid`),
+  KEY `detallerequisicion_requisicion` (`ordencompra_did`),
+  KEY `detallerequisicion_estatus` (`estatus_did`),
+  CONSTRAINT `detalleordencompra_ibfk_1` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `detalleordencompra_ibfk_2` FOREIGN KEY (`articulo_aid`) REFERENCES `articulo` (`id`),
+  CONSTRAINT `detalleordencompra_ibfk_3` FOREIGN KEY (`ordencompra_did`) REFERENCES `ordencompra` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of detalleordencompra
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `detalleordenentrega`
+-- ----------------------------
+DROP TABLE IF EXISTS `detalleordenentrega`;
+CREATE TABLE `detalleordenentrega` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `articulo_aid` int(11) unsigned NOT NULL,
+  `preciounitario` float NOT NULL,
+  `importe` float NOT NULL,
+  `porcentaje` float DEFAULT NULL,
+  `ordenentrega_did` int(11) unsigned NOT NULL,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `comentarios` text,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `detallerequisicion_articulo` (`articulo_aid`),
+  KEY `detallerequisicion_requisicion` (`ordenentrega_did`),
+  KEY `detallerequisicion_estatus` (`estatus_did`),
+  CONSTRAINT `detalleordenentrega_ibfk_1` FOREIGN KEY (`ordenentrega_did`) REFERENCES `ordenentrega` (`id`),
+  CONSTRAINT `detalleordenentrega_ibfk_2` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `detalleordenentrega_ibfk_3` FOREIGN KEY (`articulo_aid`) REFERENCES `articulo` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of detalleordenentrega
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `detallerequisicion`
+-- ----------------------------
+DROP TABLE IF EXISTS `detallerequisicion`;
+CREATE TABLE `detallerequisicion` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `articulo_aid` int(11) unsigned NOT NULL,
+  `comentarios` text,
+  `estatus_did` int(11) unsigned DEFAULT NULL,
+  `requisicion_did` int(11) unsigned NOT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `detallerequisicion_articulo` (`articulo_aid`),
+  KEY `detallerequisicion_requisicion` (`requisicion_did`),
+  KEY `detallerequisicion_estatus` (`estatus_did`),
+  CONSTRAINT `detallerequisicion_articulo` FOREIGN KEY (`articulo_aid`) REFERENCES `articulo` (`id`),
+  CONSTRAINT `detallerequisicion_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `detallerequisicion_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=43 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of detallerequisicion
+-- ----------------------------
+INSERT INTO `detallerequisicion` VALUES ('32', '12', '1', 'otro comentario', '1', '21', '2015-09-01 15:18:00');
+INSERT INTO `detallerequisicion` VALUES ('33', '5', '2', 'sin comentarios', '1', '21', '2015-09-01 15:18:00');
+INSERT INTO `detallerequisicion` VALUES ('34', '12', '1', '', '1', '22', '2015-09-03 15:41:37');
+INSERT INTO `detallerequisicion` VALUES ('35', '1', '2', '', '1', '22', '2015-09-03 15:41:37');
+INSERT INTO `detallerequisicion` VALUES ('36', '5', '3', '', '1', '22', '2015-09-03 15:41:37');
+INSERT INTO `detallerequisicion` VALUES ('37', '56', '2', 'wefwef', '1', '23', '2015-09-05 13:22:51');
+INSERT INTO `detallerequisicion` VALUES ('38', '55', '5', 'ergerg', '1', '23', '2015-09-05 13:22:51');
+INSERT INTO `detallerequisicion` VALUES ('39', '3', '3', 'rger', '1', '23', '2015-09-05 13:22:51');
+INSERT INTO `detallerequisicion` VALUES ('40', '34', '1', 'eer', '1', '23', '2015-09-05 13:22:51');
+INSERT INTO `detallerequisicion` VALUES ('41', '4', '9', 'ergerg', '1', '23', '2015-09-05 13:22:51');
+INSERT INTO `detallerequisicion` VALUES ('42', '12', '1', 'asdad', '1', '24', '2015-09-15 11:00:21');
+
+-- ----------------------------
+-- Table structure for `detallesolicitud`
+-- ----------------------------
+DROP TABLE IF EXISTS `detallesolicitud`;
+CREATE TABLE `detallesolicitud` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `articulo_aid` int(11) unsigned NOT NULL,
+  `solicitud_did` int(11) unsigned NOT NULL,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `comentarios` text,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `detallesolicitud_articulo` (`articulo_aid`),
+  KEY `detallesolicitud_requisicion` (`solicitud_did`),
+  KEY `detallesolicitud_estatus` (`estatus_did`),
+  CONSTRAINT `detallesolicitud_articulos` FOREIGN KEY (`articulo_aid`) REFERENCES `articulo` (`id`),
+  CONSTRAINT `detallesolicitud_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `detallesolicitud_solicitud` FOREIGN KEY (`solicitud_did`) REFERENCES `solicitud` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of detallesolicitud
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `empleados`
+-- ----------------------------
+DROP TABLE IF EXISTS `empleados`;
+CREATE TABLE `empleados` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL DEFAULT '',
+  `apellidos` varchar(100) DEFAULT NULL,
+  `celular` varchar(20) NOT NULL DEFAULT '',
+  `puesto` varchar(100) NOT NULL DEFAULT '',
+  `direccion` text,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechaCreacion` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `empleados_estatus` (`estatus_did`),
+  CONSTRAINT `empleados_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of empleados
+-- ----------------------------
+INSERT INTO `empleados` VALUES ('1', 'Roberto', 'Zamarripa Villegas', '6677519841', 'Director', 'Valle de Oaxaca #2542 Fracc. Valle Alto', '1', null);
+INSERT INTO `empleados` VALUES ('2', 'Juan Carlos', 'Robles Medina', '667123123', 'Programador', 'Recursos', '1', null);
+INSERT INTO `empleados` VALUES ('3', 'Roberto', 'Zamarripa', '6677519841', 'Programador', 'Valle Alto', '1', null);
+INSERT INTO `empleados` VALUES ('4', 'Hernan', 'Hernandez', '234235234', 'Líder de proyecto', 'alguna', '1', '2015-08-28 00:20:45');
+
+-- ----------------------------
+-- Table structure for `empresa`
+-- ----------------------------
+DROP TABLE IF EXISTS `empresa`;
+CREATE TABLE `empresa` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(50) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of empresa
+-- ----------------------------
+INSERT INTO `empresa` VALUES ('1', 'empresa1');
+INSERT INTO `empresa` VALUES ('2', 'empresa2');
+INSERT INTO `empresa` VALUES ('3', 'empresa3');
+INSERT INTO `empresa` VALUES ('4', 'empresa4');
+INSERT INTO `empresa` VALUES ('5', 'empresa5');
+INSERT INTO `empresa` VALUES ('6', 'empresa6');
+
+-- ----------------------------
+-- Table structure for `estatus`
+-- ----------------------------
+DROP TABLE IF EXISTS `estatus`;
+CREATE TABLE `estatus` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(20) DEFAULT NULL,
+  `requisicion` varchar(20) DEFAULT NULL,
+  `cotizacion` varchar(20) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of estatus
+-- ----------------------------
+INSERT INTO `estatus` VALUES ('1', 'Activo', 'Pendiente', 'Pendiente');
+INSERT INTO `estatus` VALUES ('2', 'Inactivo', 'Enviada', 'Aceptada');
+INSERT INTO `estatus` VALUES ('3', null, 'Cotizada', 'Rechazada');
+INSERT INTO `estatus` VALUES ('4', null, 'Cerrada', 'Cancelada');
+INSERT INTO `estatus` VALUES ('5', null, 'Eliminada', null);
+
+-- ----------------------------
+-- Table structure for `inventario`
+-- ----------------------------
+DROP TABLE IF EXISTS `inventario`;
+CREATE TABLE `inventario` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cantidad` int(11) NOT NULL,
+  `articulos_aid` int(11) unsigned NOT NULL,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `inventario_articulo` (`articulos_aid`),
+  KEY `inventario_estatus` (`estatus_did`),
+  CONSTRAINT `inventario_articulo` FOREIGN KEY (`articulos_aid`) REFERENCES `articulo` (`id`),
+  CONSTRAINT `inventario_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of inventario
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `ordencompra`
+-- ----------------------------
+DROP TABLE IF EXISTS `ordencompra`;
+CREATE TABLE `ordencompra` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `folio` varchar(20) NOT NULL DEFAULT '',
+  `requisicion_did` int(11) unsigned NOT NULL,
+  `codicionpago` varchar(20) DEFAULT NULL,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechaCreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ordencompra_requisicion` (`requisicion_did`),
+  KEY `ordencompra_estatus` (`estatus_did`),
+  CONSTRAINT `ordencompra_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `ordencompra_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ordencompra
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `ordenentrega`
+-- ----------------------------
+DROP TABLE IF EXISTS `ordenentrega`;
+CREATE TABLE `ordenentrega` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `cliente_did` int(11) unsigned NOT NULL,
+  `contacto` varchar(100) NOT NULL DEFAULT '',
+  `folio` varchar(20) NOT NULL DEFAULT '',
+  `fecha_f` date NOT NULL,
+  `comentarios` text,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `ordenentrega_cliente` (`cliente_did`),
+  KEY `ordenentrega_estatus` (`estatus_did`),
+  CONSTRAINT `ordenentrega_cliente` FOREIGN KEY (`cliente_did`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `ordenentrega_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of ordenentrega
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `pago`
+-- ----------------------------
+DROP TABLE IF EXISTS `pago`;
+CREATE TABLE `pago` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `requisicion_did` int(11) unsigned NOT NULL,
+  `cotizacion_did` int(11) unsigned NOT NULL,
+  `ordenentrega_did` int(11) unsigned NOT NULL,
+  `importe` float NOT NULL,
+  `fechaCreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of pago
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `proveedor`
+-- ----------------------------
+DROP TABLE IF EXISTS `proveedor`;
+CREATE TABLE `proveedor` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL DEFAULT '',
+  `direccion` text,
+  `contacto` varchar(100) NOT NULL DEFAULT '',
+  `telefono` varchar(12) DEFAULT '',
+  `telefono1` varchar(12) DEFAULT NULL,
+  `correo` varchar(50) NOT NULL DEFAULT '',
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechaCreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `proveedor_estatus` (`estatus_did`),
+  CONSTRAINT `proveedor_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of proveedor
+-- ----------------------------
+INSERT INTO `proveedor` VALUES ('1', 'Lapizes del norte', 'efqwef', '123', '123123', '13123', 'wefwef', '1', '2015-08-28 17:48:26');
+INSERT INTO `proveedor` VALUES ('3', 'Lala', '12312', 'efwef', '12312', '12312', 'dvwe', '1', '2015-08-28 17:54:37');
+INSERT INTO `proveedor` VALUES ('4', 'Marinela', 'vwev', '23412', '234234', '234234', 'dbergber', '1', '2015-08-28 17:54:55');
+
+-- ----------------------------
+-- Table structure for `reqporproveedor`
+-- ----------------------------
+DROP TABLE IF EXISTS `reqporproveedor`;
+CREATE TABLE `reqporproveedor` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `requisicion_did` int(11) unsigned NOT NULL,
+  `proveedor_did` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `requisicion` (`requisicion_did`),
+  KEY `proveedor` (`proveedor_did`),
+  CONSTRAINT `proveedor` FOREIGN KEY (`proveedor_did`) REFERENCES `proveedor` (`id`),
+  CONSTRAINT `requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of reqporproveedor
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `requisicion`
+-- ----------------------------
+DROP TABLE IF EXISTS `requisicion`;
+CREATE TABLE `requisicion` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `folio` varchar(20) NOT NULL DEFAULT '',
+  `fecha_f` date NOT NULL,
+  `cliente_did` int(11) unsigned NOT NULL,
+  `departamento` varchar(100) DEFAULT NULL,
+  `comentarios` text,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `usuario_aid` int(11) unsigned NOT NULL,
+  `fechaCreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `empresa_did` int(11) unsigned DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `requisicion_cliente` (`cliente_did`),
+  KEY `requisicion_estatus` (`estatus_did`),
+  KEY `requisicion_usuario` (`usuario_aid`),
+  KEY `requisicion_empresa` (`empresa_did`),
+  CONSTRAINT `requisicion_cliente` FOREIGN KEY (`cliente_did`) REFERENCES `cliente` (`id`),
+  CONSTRAINT `requisicion_empresa` FOREIGN KEY (`empresa_did`) REFERENCES `empresa` (`id`),
+  CONSTRAINT `requisicion_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`),
+  CONSTRAINT `requisicion_usuario` FOREIGN KEY (`usuario_aid`) REFERENCES `usuarios` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of requisicion
+-- ----------------------------
+INSERT INTO `requisicion` VALUES ('21', '12345', '2015-09-01', '2', 'Compras', 'un comentario', '1', '1', '2015-09-01 15:16:18', '1');
+INSERT INTO `requisicion` VALUES ('22', '4321', '2015-09-03', '2', 'Compras', 'zama', '1', '1', '2015-09-03 15:41:37', '1');
+INSERT INTO `requisicion` VALUES ('23', '546', '2015-09-05', '2', 'compras', 'ninguno', '1', '1', '2015-09-05 13:22:51', '1');
+INSERT INTO `requisicion` VALUES ('24', '1234', '2015-09-15', '2', 'compras', 'asdasd', '1', '1', '2015-09-15 11:00:21', '2');
+
+-- ----------------------------
+-- Table structure for `solicitud`
+-- ----------------------------
+DROP TABLE IF EXISTS `solicitud`;
+CREATE TABLE `solicitud` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `requisicion_did` int(11) unsigned NOT NULL,
+  `proveedor_did` int(11) unsigned NOT NULL,
+  `fecha_f` date NOT NULL,
+  `fechaCreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `solicitud_requisicion` (`requisicion_did`),
+  KEY `solicitud_proveedor` (`proveedor_did`),
+  CONSTRAINT `solicitud_proveedor` FOREIGN KEY (`proveedor_did`) REFERENCES `proveedor` (`id`),
+  CONSTRAINT `solicitud_requisicion` FOREIGN KEY (`requisicion_did`) REFERENCES `requisicion` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of solicitud
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `tipousuario`
+-- ----------------------------
+DROP TABLE IF EXISTS `tipousuario`;
+CREATE TABLE `tipousuario` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `nombre` varchar(100) NOT NULL DEFAULT '',
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechaCreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `tipousuario_estatus` (`estatus_did`),
+  CONSTRAINT `tipousuario_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of tipousuario
+-- ----------------------------
+INSERT INTO `tipousuario` VALUES ('1', 'Administrador', '1', null);
+INSERT INTO `tipousuario` VALUES ('2', 'Compras', '1', null);
+
+-- ----------------------------
+-- Table structure for `usuarios`
+-- ----------------------------
+DROP TABLE IF EXISTS `usuarios`;
+CREATE TABLE `usuarios` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `username` varchar(100) NOT NULL DEFAULT '',
+  `password_hash` varchar(100) NOT NULL DEFAULT '',
+  `status` int(10) NOT NULL,
+  `email` varchar(100) DEFAULT NULL,
+  `auth_key` varchar(50) NOT NULL DEFAULT '',
+  `created_at` int(11) NOT NULL,
+  `updated_at` int(11) NOT NULL,
+  `password_reset_token` varchar(100) NOT NULL DEFAULT '',
+  `empleado_did` int(11) unsigned NOT NULL,
+  `estatus_did` int(11) unsigned NOT NULL,
+  `fechacreacion_ft` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (`id`),
+  KEY `usuario_estatus` (`estatus_did`),
+  KEY `usuario_empleado` (`empleado_did`),
+  CONSTRAINT `usuario_empleado` FOREIGN KEY (`empleado_did`) REFERENCES `empleados` (`id`),
+  CONSTRAINT `usuario_estatus` FOREIGN KEY (`estatus_did`) REFERENCES `estatus` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of usuarios
+-- ----------------------------
+INSERT INTO `usuarios` VALUES ('1', 'zama', '$2y$13$qwBK1uVdFVElaJgmmOTejeVkF/79H9CdZjvGOgL9dunCozxDu5qcC', '10', 'roberto@masoft.mx', '0-VH3OFD9TKCnea_aZflZtGCNxoOS7Qr', '1427244706', '1427244706', '', '1', '1', '2015-07-08 12:59:40');
+INSERT INTO `usuarios` VALUES ('2', 'carlitos', '$2y$13$/YzeeqMybFr2o34Ux3102OMcKfP/RgVClimUuwuNAN2YYQ7Weu6Vq', '10', 'juancarlos@masoft.mx', 'F6WtN0hehLmVbxLxEf_Ug1Fk8fecLWpz', '1436382345', '1436382345', '', '2', '1', '2015-07-08 13:05:45');
