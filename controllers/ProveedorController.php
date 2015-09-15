@@ -140,4 +140,41 @@ class ProveedorController extends Controller
         $pdf->content = $this->renderPartial('_imprimir',['Proveedor'=>$Proveedor]);
         return $pdf->render();
     }
+    public function actionGetajax() {
+            $id = $_GET['id'];
+            $model = $this->findModel($id);
+            
+            $result = array(
+                'id' => $model->id,
+                'text' => $model->nombre,
+            );
+            echo json_encode($result);
+            Yii::$app->end();
+        }
+        
+        public function actionAutocompletesearch()
+        {
+        $q = "%". $_GET['term'] ."%";
+            $result = array();
+        if (!empty($q))
+        {
+                /*
+                    $criteria=new CDbCriteria;
+                    $criteria->select=array('id', "CONCAT_WS(' ',nombre) as nombre");               
+                    $criteria->condition="lower(CONCAT_WS(' ',nombre)) like lower(:nombre) ";
+                    $criteria->params=array(':nombre'=>$q);
+                    $criteria->limit='10';
+                */
+            $cursor = Proveedor::find()->where("lower(CONCAT_WS(' ',nombre)) like lower(:nombre)",[":nombre"=>$q])->all();
+                foreach ($cursor as $valor) 
+                //print_r($valor);
+                
+                $result[]=Array('label' => $valor->nombre,  
+                                'value' => $valor->nombre,
+                                'id'        => $valor->id);
+        }
+        echo json_encode($result);
+            exit;
+        }
+        
 }

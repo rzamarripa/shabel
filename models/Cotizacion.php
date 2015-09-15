@@ -58,14 +58,14 @@ class Cotizacion extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'folio' => 'Folio',
-            'fecha_f' => 'Fecha F',
+            'fecha_f' => 'Fecha',
             'porcentaje' => 'Porcentaje',
             'subtotal' => 'Subtotal',
             'iva' => 'Iva',
             'total' => 'Total',
-            'estatus_did' => 'Estatus Did',
-            'requisicion_did' => 'Requisicion Did',
-            'cliente_did' => 'Cliente Did',
+            'estatus_did' => 'Estatus',
+            'requisicion_did' => 'Requisicion',
+            'cliente_did' => 'Cliente',
             'comentarios' => 'Comentarios',
             'fechacreacion_ft' => 'Fechacreacion Ft',
         ];

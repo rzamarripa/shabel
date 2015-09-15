@@ -2,7 +2,10 @@
 
 use yii\helpers\Html;
 use yii\widgets\DetailView;
-?>
+$this->title = 'Ver Requisición: ' . ' ' . $requisicion->id;
+$this->params['breadcrumbs'][] = ['label' => 'Requisición', 'url' => ['index']];
+$this->params['breadcrumbs'][] = $this->title;?>
+
 <div class="requisicion-view">
 <?= Html::a('Imprimir',['imprimir','id'=>$requisicion->id],['class'=>'btn btn-default pull-right','target'=>'_blank']); ?>
 <h2>Requisición</h2>

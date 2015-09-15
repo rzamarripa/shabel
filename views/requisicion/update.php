@@ -7,8 +7,7 @@ use yii\helpers\Html;
 
 $this->title = 'Actualizar Requisición: ' . ' ' . $model->id;
 $this->params['breadcrumbs'][] = ['label' => 'Requisición', 'url' => ['index']];
-$this->params['breadcrumbs'][] = ['label' => $model->id, 'url' => ['view', 'id' => $model->id]];
-$this->params['breadcrumbs'][] = 'Actualizar';
+$this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="requisicion-update">
 

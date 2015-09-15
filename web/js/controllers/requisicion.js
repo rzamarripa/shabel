@@ -5,11 +5,17 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		cantidad: '',
 		unidad: '',
 		articulo: null,
+		precio:0,
+		importe:0,
+		precioUnitario:0,
+		proveedor:null,
+		porcentaje:0,
 		comentarios: '',
 		editing: true,
 		error: {
 			cantidad: false,
-			articulo: false
+			articulo: false,
+			proveedor: false
 		}
 	}
 
@@ -25,9 +31,8 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		});
 	} else {
 		$scope.items = [angular.copy(empty_item)];
-	}
-
-	$scope.articulosOptions = {
+	}    
+    	$scope.articulosOptions = {
 		containerCssClass: 'myselect2',
 		width: '100%',
 		minimumInputLength: 2,
@@ -57,6 +62,43 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
       if (id !== "") {
       	$.ajax({
       		url: helpers.urls.base + "/index.php/articulo/getajax?id="+id,
+          dataType: "json"
+        }).done(function(data) { 
+        	callback(data); 
+        	$scope.$apply();
+       	});
+      }
+		}
+	};
+	$scope.proveedoresOptions = {
+		containerCssClass: 'myselect2',
+		width: '100%',
+		minimumInputLength: 2,
+		ajax: {
+			url: helpers.urls.base + '/index.php/proveedor/autocompletesearch',
+			dataType: 'json',
+			data: function (term, page) {
+				return {
+					term: term
+				}
+			},
+			results: function (data, page) {
+				//console.log(data);
+				var items = [];
+				for(var i = 0; i < data.length; i++) {
+					items.push({
+						id: data[i].id,
+						text: data[i].value
+					});
+				}
+				return {results: items}
+			}
+		},
+		initSelection: function (el, callback) {
+			var id = $(el).val();
+      if (id !== "") {
+      	$.ajax({
+      		url: helpers.urls.base + "/index.php/proveedor/getajax?id="+id,
           dataType: "json"
         }).done(function(data) { 
         	callback(data); 
@@ -111,6 +153,23 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		if (i >= 0) $scope.items.splice(i, 1);
 	}
 
+	$scope.getTotal = function(){
+	    var subtotal = 0;
+	    angular.forEach($scope.items, function (item) {
+			subtotal += item.importe;
+			var importe = 0;
+				importe = item.precioFinal * item.cantidad;
+				item.importe = importe;
+			var precioFinal = 0;
+			if($scope.porcentajeGeneral === null){precioFinal = ((item.precioUnitario * item.porcentaje)/100) + item.precioUnitario;}
+				else if($scope.porcentajeGeneral >= 0){precioFinal = ((item.precioUnitario * (item.porcentaje+parseFloat($scope.porcentajeGeneral)))/100) + item.precioUnitario;}
+				item.precioFinal = precioFinal;
+		});
+		var iva = subtotal*.16;
+		var total = subtotal + iva;
+	    return [subtotal, iva, total];
+	}
+
 
 	// Esto se debe cambiar para que sea mas angular.js
 	validateDetalle = function (form) {
@@ -121,4 +180,5 @@ app.controller('RequisicionFormCtrl', ['$scope', function ($scope) {
 		$scope.$apply();
 		return !error;
 	}
+	$scope.porcentajeGeneral = 0;
 }]);

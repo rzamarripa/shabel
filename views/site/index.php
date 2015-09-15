@@ -1,8 +1,9 @@
 <?php
 /* @var $this yii\web\View */
-$this->title = 'My Yii Application';
 use yii\helpers\Html;
 use app\models\USUARIOS;
+$this->title = 'Inicio';
+$this->params['breadcrumbs'][] = '';
 ?>
 <div class="site-index">
 

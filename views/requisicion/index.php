@@ -14,6 +14,7 @@ $this->title = 'Requisición';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 
+
 <button class="btn btn-primary" type="button" data-toggle="collapse" data-target="#form" aria-expanded="false" aria-controls="form" style="margin-bottom:10px;">
   Nuevo
 </button>
